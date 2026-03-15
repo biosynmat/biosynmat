@@ -72,61 +72,63 @@ export function SiteHeader() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-30 border-b border-slate-200/60 bg-white/60 backdrop-blur-md!">
-      <div className="mx-auto flex w-full max-w-7xl items-center gap-4 px-4 py-5 sm:px-6 lg:px-8">
-        <Link
-          href="/"
-          className="inline-flex shrink-0 items-center gap-3 text-lg font-semibold tracking-[0.18em] text-slate-900"
-        >
-          <Image
-            src="/logo.png"
-            alt="BioSynMat logo"
-            width={54}
-            height={54}
-            className="h-12 w-12 rounded-md object-cover"
-          />
-          <span>BIOSYNMAT</span>
-        </Link>
+    <>
+      <header className="sticky top-0 z-30 border-b border-slate-200/60 bg-white/60 backdrop-blur-md!">
+        <div className="mx-auto flex w-full max-w-7xl items-center gap-4 px-4 py-5 sm:px-6 lg:px-8">
+          <Link
+            href="/"
+            className="inline-flex shrink-0 items-center gap-3 text-lg font-semibold tracking-[0.18em] text-slate-900"
+          >
+            <Image
+              src="/logo.png"
+              alt="BioSynMat logo"
+              width={54}
+              height={54}
+              className="h-12 w-12 rounded-md object-cover"
+            />
+            <span>BIOSYNMAT</span>
+          </Link>
 
-        <button
-          type="button"
-          onClick={() => setIsMobileMenuOpen(true)}
-          aria-label="Open navigation menu"
-          aria-expanded={isMobileMenuOpen}
-          aria-controls="mobile-menu-sheet"
-          className="ml-auto inline-flex items-center justify-center rounded-full border border-slate-200 bg-white p-3 text-slate-700 transition hover:bg-slate-100 md:hidden"
-        >
-          <Menu className="h-5 w-5 fill-none" />
-        </button>
+          <button
+            type="button"
+            onClick={() => setIsMobileMenuOpen(true)}
+            aria-label="Open navigation menu"
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu-sheet"
+            className="ml-auto inline-flex items-center justify-center rounded-full border border-slate-200 bg-white p-3 text-slate-700 transition hover:bg-slate-100 md:hidden"
+          >
+            <Menu className="h-5 w-5 fill-none" />
+          </button>
 
-        <nav
-          aria-label="Primary"
-          className=" justify-end hidden md:flex! md:gap-1"
-        >
-          <ul className="flex flex-wrap items-center justify-end gap-1">
-            {navLinks.map((item) => {
-              const Icon = navIcons[item.href] ?? Home;
-              return (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className={`inline-flex rounded-full items-center justify-center px-4 py-2.5 text-base font-medium transition ${
-                      isActive(item.href)
-                        ? "teal-link bg-teal-700 shadow-sm"
-                        : "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
-                    }`}
-                  >
-                    <span className="inline-flex items-center justify-center gap-1.5 text-inherit">
-                      <Icon className="h-4 w-4 fill-none" />
-                      {item.label}
-                    </span>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
-      </div>
+          <nav
+            aria-label="Primary"
+            className=" justify-end hidden md:flex! md:gap-1"
+          >
+            <ul className="flex flex-wrap items-center justify-end gap-1">
+              {navLinks.map((item) => {
+                const Icon = navIcons[item.href] ?? Home;
+                return (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className={`inline-flex rounded-full items-center justify-center px-4 py-2.5 text-base font-medium transition ${
+                        isActive(item.href)
+                          ? "teal-link bg-teal-700 shadow-sm"
+                          : "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
+                      }`}
+                    >
+                      <span className="inline-flex items-center justify-center gap-1.5 text-inherit">
+                        <Icon className="h-4 w-4 fill-none" />
+                        {item.label}
+                      </span>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+        </div>
+      </header>
 
       {isMobileMenuOpen ? (
         <div className="md:hidden">
@@ -134,12 +136,12 @@ export function SiteHeader() {
             type="button"
             aria-label="Close navigation menu"
             onClick={() => setIsMobileMenuOpen(false)}
-            className="fixed inset-0 z-40 bg-slate-900/45"
+            className="fixed inset-0 z-[70] bg-black/80 backdrop-blur-[1px]"
           />
 
           <aside
             id="mobile-menu-sheet"
-            className="fixed right-0 top-0 z-50 flex h-screen w-[86vw] max-w-sm flex-col border-l border-slate-200 bg-white p-5 shadow-2xl"
+            className="fixed right-0 top-0 z-[80] flex h-screen w-[86vw] max-w-sm flex-col border-l border-slate-200 bg-white p-5 shadow-2xl"
             role="dialog"
             aria-modal="true"
             aria-label="Mobile navigation menu"
@@ -184,6 +186,6 @@ export function SiteHeader() {
           </aside>
         </div>
       ) : null}
-    </header>
+    </>
   );
 }

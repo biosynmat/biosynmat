@@ -79,11 +79,11 @@ export function GalleryFeed({ items }: GalleryFeedProps) {
 
       {selected ? (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/45 px-4 py-6 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-end justify-center bg-slate-900/45 px-3 py-3 backdrop-blur-sm sm:items-center sm:px-4 sm:py-6"
           onClick={closeModal}
         >
           <div
-            className="w-full max-w-5xl rounded-2xl border border-slate-200 bg-white p-4 shadow-2xl sm:p-5"
+            className="w-full max-w-5xl max-h-[92vh] overflow-y-auto rounded-2xl border border-slate-200 bg-white p-3 shadow-2xl sm:p-5"
             onClick={(event) => event.stopPropagation()}
           >
             <div className="mb-3 flex items-center justify-end">
@@ -97,7 +97,7 @@ export function GalleryFeed({ items }: GalleryFeedProps) {
               </button>
             </div>
 
-            <div className="max-h-[68vh] overflow-auto rounded-xl bg-slate-100 p-2">
+            <div className="max-h-[58vh] overflow-auto rounded-xl bg-slate-100 p-2 sm:max-h-[68vh]">
               <Image
                 src={selected.image}
                 alt={selected.title}

@@ -6,17 +6,19 @@ export function SiteFooter() {
   return (
     <footer className="border-t border-slate-200 bg-slate-50/80">
       <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 py-8 text-sm text-slate-600 sm:px-6 lg:grid-cols-[1.2fr_0.8fr] lg:px-8">
-        <div>
+        <div className="flex items-start">
           <Link href="/" className="inline-flex items-center gap-3">
             <Image
               src="/logo.png"
               alt="BioSynMat logo"
               width={160}
               height={160}
-              className="h-40 w-40 rounded-md object-contain"
+              className="h-16 w-16 rounded-md object-contain sm:h-24 sm:w-24 lg:h-32 lg:w-32"
             />
             <div>
-              <p className="text-4xl font-semibold text-slate-900">BioSynMat</p>
+              <p className="text-2xl font-semibold text-slate-900 sm:text-3xl lg:text-4xl">
+                BioSynMat
+              </p>
             </div>
           </Link>
           {/* <p className="mt-2 max-w-md leading-relaxed">
@@ -25,8 +27,8 @@ export function SiteFooter() {
           </p> */}
         </div>
 
-        <div className="flex flex-col items-end">
-          <div className="mb-4 flex flex-col">
+        <div className="flex flex-col items-start lg:items-end">
+          <div className="mb-4 flex w-full max-w-xs flex-col">
             <p className="mb-2 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.1em] text-slate-500">
               <Building2 className="h-3.5 w-3.5" />
               Institution
@@ -48,11 +50,11 @@ export function SiteFooter() {
             </a>
           </div>
 
-          <div className="mt-3 flex flex-col gap-2">
+          <div className="mt-3 flex w-full flex-col gap-2 lg:items-end">
             <p className="text-sm font-semibold uppercase tracking-[0.12em] text-slate-900">
               Connect
             </p>
-            <div className="flex flex-row">
+            <div className="flex flex-wrap gap-2">
               <a
                 href="https://www.linkedin.com/"
                 target="_blank"
@@ -71,7 +73,7 @@ export function SiteFooter() {
               </a>
             </div>
           </div>
-          <p className="mt-4 text-xs text-slate-500">
+          <p className="mt-4 break-all text-xs text-slate-500 lg:text-right">
             Email: ananyam@srmist.edu.in
           </p>
         </div>

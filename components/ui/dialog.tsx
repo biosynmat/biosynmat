@@ -53,17 +53,17 @@ function DialogContent({
   return (
     <DialogPortal>
       <DialogOverlay />
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4">
         <DialogPrimitive.Content
           data-slot="dialog-content"
           className={cn(
-            "relative w-full max-w-2xl rounded-2xl border border-slate-200 bg-white p-6 shadow-xl transition-all duration-200 ease-out data-[state=closed]:scale-95 data-[state=closed]:opacity-0 data-[state=open]:scale-100 data-[state=open]:opacity-100",
+            "relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-slate-200 bg-white p-4 shadow-xl transition-all duration-200 ease-out data-[state=closed]:scale-95 data-[state=closed]:opacity-0 data-[state=open]:scale-100 data-[state=open]:opacity-100 sm:p-6",
             className,
           )}
           {...props}
         >
           {children}
-          <DialogPrimitive.Close className="absolute top-4 right-4 rounded-md border border-slate-200 p-1.5 text-slate-600 transition hover:bg-slate-100">
+          <DialogPrimitive.Close className="absolute top-3 right-3 rounded-md border border-slate-200 p-1.5 text-slate-600 transition hover:bg-slate-100 sm:top-4 sm:right-4">
             <X className="h-4 w-4" />
             <span className="sr-only">Close</span>
           </DialogPrimitive.Close>

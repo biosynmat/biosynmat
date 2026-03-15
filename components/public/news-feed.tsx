@@ -81,14 +81,14 @@ export function NewsFeed({ limitCount }: NewsFeedProps) {
                   Know More
                 </button>
               </DialogTrigger>
-              <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-3xl">
+              <DialogContent className="max-h-[90vh] overflow-y-auto p-4 sm:max-w-3xl sm:p-6">
                 {item.image ? (
                   <Image
                     src={item.image}
                     alt={item.title}
                     width={1200}
                     height={675}
-                    className="mb-4 h-52 w-full rounded-xl border border-slate-200 object-cover sm:h-fit"
+                    className="mb-4 h-44 w-full rounded-xl border border-slate-200 object-cover sm:h-64"
                   />
                 ) : null}
                 <DialogHeader className="pr-8">

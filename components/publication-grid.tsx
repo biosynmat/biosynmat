@@ -59,12 +59,12 @@ export function PublicationGrid({ items }: PublicationGridProps) {
         open={Boolean(selectedPublication)}
         onOpenChange={(open) => !open && setSelectedId(null)}
       >
-        <DialogContent>
+        <DialogContent className="max-h-[90vh] overflow-y-auto p-4 sm:p-6">
           {selectedPublication ? (
             <>
               <DialogHeader>
                 {selectedPublication.coverImage ? (
-                  <div className="relative mx-auto aspect-[9/16] w-full max-w-[180px] overflow-hidden rounded-xl">
+                  <div className="relative mx-auto aspect-[9/16] w-full max-w-[140px] overflow-hidden rounded-xl sm:max-w-[180px]">
                     <Image
                       src={selectedPublication.coverImage}
                       alt={`${selectedPublication.title} cover`}
