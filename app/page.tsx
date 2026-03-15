@@ -1,65 +1,119 @@
-import Image from "next/image";
+import Link from "next/link";
+import { HomePublicationsPreview } from "@/components/public/home-publications-preview";
+import { NewsFeed } from "@/components/public/news-feed";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div className="py-10 sm:py-14">
+      <section className="section-shell">
+        <div className="grid gap-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10 lg:grid-cols-[1.2fr_0.8fr]">
+          <div>
+            <p className="mb-4 inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-700">
+              About us
+            </p>
+            <h1 className="mb-5 text-3xl font-semibold leading-tight text-slate-900 sm:text-5xl">
+              BioSynMat Lab
+            </h1>
+            <p className="max-w-2xl text-lg leading-relaxed text-slate-700">
+              Our Research is dedicated to creating bioinspired synthetic
+              materials that emulate the structure, dynamics and functionality
+              of living systems. Our work bridges chemistry, materials science
+              and biology to understand and engineer protocells as minimal
+              models of life.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                href="/meet-ananya-mishra"
+                className="teal-link inline-flex items-center rounded-full bg-teal-700 px-5 py-2.5 text-sm font-semibold transition hover:bg-teal-800"
+              >
+                Meet the PI
+              </Link>
+              <Link
+                href="/research"
+                className="inline-flex items-center rounded-full border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+              >
+                Explore Research
+              </Link>
+            </div>
+          </div>
+
+          {/* <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+            <h2 className="mb-4 text-xl font-semibold text-slate-900">
+              Research Focus
+            </h2>
+            <ul className="space-y-3 text-sm leading-relaxed text-slate-700">
+              <li className="rounded-xl bg-white p-3">
+                Synthetic cell-to-cell communication in protocell populations
+              </li>
+              <li className="rounded-xl bg-white p-3">
+                Hierarchical organization from protocells to prototissues
+              </li>
+              <li className="rounded-xl bg-white p-3">
+                Programmable nanoparticle-enabled compartment behavior
+              </li>
+            </ul>
+          </div> */}
+        </div>
+      </section>
+
+      <section className="section-shell mt-12 sm:mt-16">
+        <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10">
+          <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <p className="mb-2 text-sm font-semibold uppercase tracking-[0.12em] text-teal-800">
+                Publications
+              </p>
+              <h2 className="text-3xl font-semibold text-slate-900">
+                Featured Publications
+              </h2>
+            </div>
+            <Link
+              href="/publications"
+              className="text-sm font-semibold text-teal-800 underline-offset-4 hover:underline"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+              View All Publications
+            </Link>
+          </div>
+
+          <HomePublicationsPreview limitCount={3} />
+        </div>
+      </section>
+
+      <section className="section-shell mt-12 sm:mt-16">
+        <div className="rounded-3xl border border-teal-100 bg-teal-50 p-6 sm:p-10">
+          <h2 className="mb-3 text-2xl font-semibold text-slate-900">
+            Join the BioSynMat team
+          </h2>
+          <p className="max-w-3xl text-slate-700">
+            We welcome motivated students and scholars who want to work on
+            protocells, synthetic communication systems, and biomimetic
+            materials.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/opportunities"
+            className="teal-link mt-6 inline-flex items-center rounded-full bg-teal-700 px-5 py-2.5 text-sm font-semibold transition hover:bg-teal-800"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            Contact Us
+          </Link>
         </div>
-      </main>
+      </section>
+
+      <section className="section-shell mt-12 sm:mt-16">
+        <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10">
+          <div className="mb-6 flex items-center justify-between gap-3">
+            <h2 className="text-2xl font-semibold text-slate-900">
+              Latest News
+            </h2>
+            <Link
+              href="/news"
+              className="text-sm font-semibold text-teal-800 underline-offset-4 hover:underline"
+            >
+              View All News
+            </Link>
+          </div>
+          <NewsFeed limitCount={3} />
+        </div>
+      </section>
     </div>
   );
 }

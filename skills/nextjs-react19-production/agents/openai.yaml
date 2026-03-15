@@ -1,0 +1,4 @@
+interface:
+  display_name: "Next.js React 19 Production"
+  short_description: "Next.js App Router production implementation standards"
+  default_prompt: "Use $nextjs-react19-production to implement or review a Next.js 15+ App Router change with server-first React 19 patterns, strict TypeScript, secure defaults, and explicit caching/revalidation."
