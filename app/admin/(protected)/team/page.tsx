@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { FormEvent, useEffect, useState } from "react";
-import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query, serverTimestamp, updateDoc } from "firebase/firestore";
 import type { TeamMemberRecord } from "@/lib/admin-types";
 import { firebaseDb } from "@/lib/firebase/client";
 import { UploadThingButton, extractUploadUrl } from "@/utils/uploadthing";
@@ -20,6 +20,7 @@ export default function AdminTeamPage() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
 
   const loadItems = async () => {
     setIsLoading(true);
@@ -49,7 +50,13 @@ export default function AdminTeamPage() {
     loadItems();
   }, []);
 
-  const handleCreate = async (event: FormEvent<HTMLFormElement>) => {
+  const resetForm = () => {
+    setForm(initialForm);
+    setUploadedImageUrl("");
+    setEditingId(null);
+  };
+
+  const handleSave = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError("");
     setIsSaving(true);
@@ -59,22 +66,40 @@ export default function AdminTeamPage() {
         throw new Error("Please upload a profile image before saving.");
       }
 
-      await addDoc(collection(firebaseDb, "team_members"), {
+      const payload = {
         name: form.name.trim(),
         role: form.role.trim(),
         image: uploadedImageUrl,
         linkedin: form.linkedin.trim(),
-        createdAt: serverTimestamp(),
-      });
+      };
 
-      setForm(initialForm);
-      setUploadedImageUrl("");
+      if (editingId) {
+        await updateDoc(doc(firebaseDb, "team_members", editingId), payload);
+      } else {
+        await addDoc(collection(firebaseDb, "team_members"), {
+          ...payload,
+          createdAt: serverTimestamp(),
+        });
+      }
+
+      resetForm();
       await loadItems();
-    } catch (createError) {
-      setError((createError as Error).message);
+    } catch (saveError) {
+      setError((saveError as Error).message);
     } finally {
       setIsSaving(false);
     }
+  };
+
+  const handleEdit = (item: TeamMemberRecord) => {
+    setError("");
+    setEditingId(item.id);
+    setForm({
+      name: item.name,
+      role: item.role,
+      linkedin: item.linkedin ?? "",
+    });
+    setUploadedImageUrl(item.image);
   };
 
   const handleDelete = async (id: string) => {
@@ -89,8 +114,10 @@ export default function AdminTeamPage() {
 
   return (
     <div className="space-y-6">
-      <form onSubmit={handleCreate} className="grid gap-3 rounded-2xl border border-slate-200 bg-white p-4 sm:grid-cols-2">
-        <h2 className="text-xl font-semibold text-slate-900 sm:col-span-2">Add Team Member</h2>
+      <form onSubmit={handleSave} className="grid gap-3 rounded-2xl border border-slate-200 bg-white p-4 sm:grid-cols-2">
+        <h2 className="text-xl font-semibold text-slate-900 sm:col-span-2">
+          {editingId ? "Edit Team Member" : "Add Team Member"}
+        </h2>
 
         <input
           required
@@ -139,8 +166,17 @@ export default function AdminTeamPage() {
           disabled={isSaving}
           className="teal-link inline-flex w-fit rounded-full bg-teal-700 px-4 py-2 text-sm font-semibold hover:bg-teal-800 disabled:opacity-60 sm:col-span-2"
         >
-          {isSaving ? "Saving..." : "Add Team Member"}
+          {isSaving ? "Saving..." : editingId ? "Update Team Member" : "Add Team Member"}
         </button>
+        {editingId ? (
+          <button
+            type="button"
+            onClick={resetForm}
+            className="inline-flex w-fit rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100 sm:col-span-2"
+          >
+            Cancel Edit
+          </button>
+        ) : null}
       </form>
 
       {error ? <p className="text-sm text-red-600">{error}</p> : null}
@@ -163,13 +199,22 @@ export default function AdminTeamPage() {
               ) : null}
               <p className="text-base font-semibold text-slate-900">{item.name}</p>
               <p className="text-sm text-slate-700">{item.role}</p>
-              <button
-                type="button"
-                onClick={() => handleDelete(item.id)}
-                className="mt-3 rounded-full border border-red-300 bg-red-50 px-3 py-1 text-xs font-semibold text-red-700"
-              >
-                Remove
-              </button>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  onClick={() => handleEdit(item)}
+                  className="rounded-full border border-slate-300 bg-white px-3 py-1 text-xs font-semibold text-slate-700 hover:bg-slate-100"
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleDelete(item.id)}
+                  className="rounded-full border border-red-300 bg-red-50 px-3 py-1 text-xs font-semibold text-red-700"
+                >
+                  Remove
+                </button>
+              </div>
             </article>
           ))}
         </div>

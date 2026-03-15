@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { FormEvent, useEffect, useState } from "react";
-import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query, serverTimestamp, updateDoc } from "firebase/firestore";
 import { TiptapEditor } from "@/components/admin/tiptap-editor";
 import type { NewsRecord } from "@/lib/admin-types";
 import { firebaseDb } from "@/lib/firebase/client";
@@ -22,6 +22,7 @@ export default function AdminNewsPage() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
 
   const loadItems = async () => {
     setIsLoading(true);
@@ -52,29 +53,54 @@ export default function AdminNewsPage() {
     loadItems();
   }, []);
 
-  const handleCreate = async (event: FormEvent<HTMLFormElement>) => {
+  const resetForm = () => {
+    setForm(initialForm);
+    setUploadedImageUrl("");
+    setEditingId(null);
+  };
+
+  const handleSave = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError("");
     setIsSaving(true);
 
     try {
-      await addDoc(collection(firebaseDb, "news"), {
+      const payload = {
         title: form.title.trim(),
         date: form.date.trim(),
         summary: form.summary.trim(),
         contentHtml: form.contentHtml,
         image: uploadedImageUrl,
-        createdAt: serverTimestamp(),
-      });
+      };
 
-      setForm(initialForm);
-      setUploadedImageUrl("");
+      if (editingId) {
+        await updateDoc(doc(firebaseDb, "news", editingId), payload);
+      } else {
+        await addDoc(collection(firebaseDb, "news"), {
+          ...payload,
+          createdAt: serverTimestamp(),
+        });
+      }
+
+      resetForm();
       await loadItems();
-    } catch (createError) {
-      setError((createError as Error).message);
+    } catch (saveError) {
+      setError((saveError as Error).message);
     } finally {
       setIsSaving(false);
     }
+  };
+
+  const handleEdit = (item: NewsRecord) => {
+    setError("");
+    setEditingId(item.id);
+    setForm({
+      title: item.title,
+      date: item.date,
+      summary: item.summary,
+      contentHtml: item.contentHtml,
+    });
+    setUploadedImageUrl(item.image ?? "");
   };
 
   const handleDelete = async (id: string) => {
@@ -89,8 +115,10 @@ export default function AdminNewsPage() {
 
   return (
     <div className="space-y-6">
-      <form onSubmit={handleCreate} className="space-y-3 rounded-2xl border border-slate-200 bg-white p-4">
-        <h2 className="text-xl font-semibold text-slate-900">Create News Item</h2>
+      <form onSubmit={handleSave} className="space-y-3 rounded-2xl border border-slate-200 bg-white p-4">
+        <h2 className="text-xl font-semibold text-slate-900">
+          {editingId ? "Edit News Item" : "Create News Item"}
+        </h2>
 
         <div className="grid gap-3 sm:grid-cols-2">
           <input
@@ -145,8 +173,17 @@ export default function AdminNewsPage() {
         </div>
 
         <button type="submit" disabled={isSaving} className="teal-link inline-flex rounded-full bg-teal-700 px-4 py-2 text-sm font-semibold hover:bg-teal-800 disabled:opacity-60">
-          {isSaving ? "Saving..." : "Create News"}
+          {isSaving ? "Saving..." : editingId ? "Update News" : "Create News"}
         </button>
+        {editingId ? (
+          <button
+            type="button"
+            onClick={resetForm}
+            className="ml-2 inline-flex rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100"
+          >
+            Cancel Edit
+          </button>
+        ) : null}
       </form>
 
       {error ? <p className="text-sm text-red-600">{error}</p> : null}
@@ -164,13 +201,22 @@ export default function AdminNewsPage() {
               <p className="text-base font-semibold text-slate-900">{item.title}</p>
               <p className="text-xs uppercase tracking-[0.1em] text-slate-500">{item.date}</p>
               <p className="mt-2 text-sm text-slate-700">{item.summary}</p>
-              <button
-                type="button"
-                onClick={() => handleDelete(item.id)}
-                className="mt-3 rounded-full border border-red-300 bg-red-50 px-3 py-1 text-xs font-semibold text-red-700"
-              >
-                Remove
-              </button>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  onClick={() => handleEdit(item)}
+                  className="rounded-full border border-slate-300 bg-white px-3 py-1 text-xs font-semibold text-slate-700 hover:bg-slate-100"
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleDelete(item.id)}
+                  className="rounded-full border border-red-300 bg-red-50 px-3 py-1 text-xs font-semibold text-red-700"
+                >
+                  Remove
+                </button>
+              </div>
             </article>
           ))}
         </div>
