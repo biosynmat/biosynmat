@@ -5,6 +5,7 @@ import { FormEvent, useEffect, useState } from "react";
 import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query, serverTimestamp, updateDoc } from "firebase/firestore";
 import type { TeamMemberRecord } from "@/lib/admin-types";
 import { firebaseDb } from "@/lib/firebase/client";
+import { normalizeExternalUrl } from "@/lib/utils";
 import { UploadThingButton, extractUploadUrl } from "@/utils/uploadthing";
 
 const initialForm = {
@@ -74,9 +75,9 @@ export default function AdminTeamPage() {
         name: form.name.trim(),
         role: form.role.trim(),
         image: uploadedImageUrl,
-        linkedin: form.linkedin.trim(),
-        researchgate: form.researchgate.trim(),
-        orcid: form.orcid.trim(),
+        linkedin: normalizeExternalUrl(form.linkedin),
+        researchgate: normalizeExternalUrl(form.researchgate),
+        orcid: normalizeExternalUrl(form.orcid),
       };
 
       if (editingId) {

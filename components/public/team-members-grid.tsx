@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import type { TeamMemberRecord } from "@/lib/admin-types";
 import { readTeamMembers } from "@/lib/firebase/public-read";
 import { teamMembers } from "@/lib/site-data";
+import { normalizeExternalUrl } from "@/lib/utils";
 
 function fallbackMembers(): TeamMemberRecord[] {
   return teamMembers.map((member, index) => ({
@@ -44,7 +45,12 @@ export function TeamMembersGrid() {
 
   return (
     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {items.map((member) => (
+      {items.map((member) => {
+        const linkedinUrl = normalizeExternalUrl(member.linkedin);
+        const researchgateUrl = normalizeExternalUrl(member.researchgate);
+        const orcidUrl = normalizeExternalUrl(member.orcid);
+
+        return (
         <article
           key={member.id}
           className="group relative isolate aspect-[3/4] overflow-hidden rounded-[2rem] border border-slate-200 bg-slate-100 shadow-sm"
@@ -64,9 +70,9 @@ export function TeamMembersGrid() {
           <div className="absolute inset-x-4 bottom-4 rounded-[1.5rem] border border-white/15 bg-black/50 px-5 py-4 backdrop-blur-md sm:inset-x-5 sm:bottom-5">
             <h3 className="text-3xl font-semibold text-white">{member.name}</h3>
             <p className="mt-1 text-xs font-medium uppercase tracking-[0.16em] text-white/75 sm:text-sm">{member.role}</p>
-            {member.linkedin ? (
+            {linkedinUrl ? (
               <a
-                href={member.linkedin}
+                href={linkedinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${member.name} LinkedIn`}
@@ -76,9 +82,9 @@ export function TeamMembersGrid() {
                 <span className="sr-only">LinkedIn</span>
               </a>
             ) : null}
-            {member.researchgate ? (
+            {researchgateUrl ? (
               <a
-                href={member.researchgate}
+                href={researchgateUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${member.name} ResearchGate`}
@@ -88,9 +94,9 @@ export function TeamMembersGrid() {
                 <span className="sr-only">ResearchGate</span>
               </a>
             ) : null}
-            {member.orcid ? (
+            {orcidUrl ? (
               <a
-                href={member.orcid}
+                href={orcidUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${member.name} ORCID`}
@@ -102,7 +108,8 @@ export function TeamMembersGrid() {
             ) : null}
           </div>
         </article>
-      ))}
+        );
+      })}
     </div>
   );
 }

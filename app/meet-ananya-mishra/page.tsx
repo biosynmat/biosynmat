@@ -2,12 +2,15 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Linkedin, Mail } from "lucide-react";
 import { piDetails } from "@/lib/site-data";
+import { normalizeExternalUrl } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Meet Ananya Mishra",
 };
 
 export default function MeetPiPage() {
+  const piLinkedin = normalizeExternalUrl(piDetails.linkedin);
+
   return (
     <div className="section-shell py-10 sm:py-14">
       <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10">
@@ -40,7 +43,7 @@ export default function MeetPiPage() {
             </a>
             <br />
             <a
-              href={piDetails.linkedin}
+              href={piLinkedin}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-1 inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-100"

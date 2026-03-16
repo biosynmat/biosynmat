@@ -4,12 +4,17 @@ import Link from "next/link";
 import { Linkedin } from "lucide-react";
 import { TeamMembersGrid } from "@/components/public/team-members-grid";
 import { piDetails } from "@/lib/site-data";
+import { normalizeExternalUrl } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Team",
 };
 
 export default function TeamPage() {
+  const piLinkedin = normalizeExternalUrl(piDetails.linkedin);
+  const piResearchGate = normalizeExternalUrl(piDetails.researchgate);
+  const piOrcid = normalizeExternalUrl(piDetails.orcid);
+
   return (
     <div className="section-shell py-10 sm:py-14">
       <h1 className="mb-6 text-4xl font-semibold text-slate-900">Team</h1>
@@ -33,7 +38,7 @@ export default function TeamPage() {
             <p className="mt-1 text-slate-600">{piDetails.title}</p>
             <div className="mt-3 flex flex-wrap items-center gap-2.5">
               <a
-                href={piDetails.linkedin}
+                href={piLinkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${piDetails.name} LinkedIn`}
@@ -42,9 +47,9 @@ export default function TeamPage() {
                 <Linkedin className="h-4 w-4" />
                 <span className="sr-only">LinkedIn</span>
               </a>
-              {piDetails.researchgate ? (
+              {piResearchGate ? (
                 <a
-                  href={piDetails.researchgate}
+                  href={piResearchGate}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${piDetails.name} ResearchGate`}
@@ -54,9 +59,9 @@ export default function TeamPage() {
                   <span className="sr-only">ResearchGate</span>
                 </a>
               ) : null}
-              {piDetails.orcid ? (
+              {piOrcid ? (
                 <a
-                  href={piDetails.orcid}
+                  href={piOrcid}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${piDetails.name} ORCID`}
