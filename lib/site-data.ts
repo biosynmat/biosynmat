@@ -68,7 +68,7 @@ export const latestNews: NewsItem[] = [
 
 export const piDetails = {
   name: "Dr. Ananya Mishra",
-  title: "Assistant Professor (Research), Department of Chemistry, SRMIST",
+  title: "Assistant Professor, Department of Chemistry, SRMIST",
   email: "ananyam@srmist.edu.in",
   office: "SRM Institute of Science and Technology, Kattankulathur, Chennai",
   image: "/team/ananya.jpeg",
