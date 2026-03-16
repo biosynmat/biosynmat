@@ -62,7 +62,7 @@ export function SiteFooter() {
                 LinkedIn
               </a>
               <a
-                href="mailto:ananyam@srmist.edu.in"
+                href="mailto:biosynmat@gmail.com"
                 className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-100"
               >
                 <Mail className="h-3.5 w-3.5" />
@@ -71,7 +71,7 @@ export function SiteFooter() {
             </div>
           </div>
           <p className="mt-4 break-all text-xs text-slate-500 lg:text-right">
-            Email: ananyam@srmist.edu.in
+            Email: biosynmat@gmail.com
           </p>
         </div>
       </div>
