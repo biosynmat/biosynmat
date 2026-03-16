@@ -4,6 +4,8 @@ export type TeamMemberRecord = {
   role: string;
   image: string;
   linkedin?: string;
+  researchgate?: string;
+  orcid?: string;
   createdAt?: string | null;
 };
 
@@ -34,6 +36,7 @@ export type GalleryRecord = {
   id: string;
   title: string;
   date: string;
-  image: string;
+  images: string[];
+  image?: string;
   createdAt?: string | null;
 };

@@ -5,6 +5,19 @@ import { Linkedin } from "lucide-react";
 import { useEffect, useState } from "react";
 import type { TeamMemberRecord } from "@/lib/admin-types";
 import { readTeamMembers } from "@/lib/firebase/public-read";
+import { teamMembers } from "@/lib/site-data";
+
+function fallbackMembers(): TeamMemberRecord[] {
+  return teamMembers.map((member, index) => ({
+    id: `fallback-${index}`,
+    name: member.name,
+    role: member.role,
+    image: member.image,
+    linkedin: member.linkedin ?? "",
+    researchgate: member.researchgate ?? "",
+    orcid: member.orcid ?? "",
+  }));
+}
 
 export function TeamMembersGrid() {
   const [items, setItems] = useState<TeamMemberRecord[]>([]);
@@ -14,9 +27,9 @@ export function TeamMembersGrid() {
     const load = async () => {
       try {
         const records = await readTeamMembers();
-        setItems(records);
+        setItems(records.length > 0 ? records : fallbackMembers());
       } catch {
-        setItems([]);
+        setItems(fallbackMembers());
       } finally {
         setIsLoading(false);
       }
@@ -27,10 +40,6 @@ export function TeamMembersGrid() {
 
   if (isLoading) {
     return <p className="text-sm text-slate-600">Loading team members...</p>;
-  }
-
-  if (items.length === 0) {
-    return <p className="text-sm text-slate-600">No team members added yet.</p>;
   }
 
   return (
@@ -65,6 +74,30 @@ export function TeamMembersGrid() {
               >
                 <Linkedin className="h-4 w-4" />
                 <span className="sr-only">LinkedIn</span>
+              </a>
+            ) : null}
+            {member.researchgate ? (
+              <a
+                href={member.researchgate}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${member.name} ResearchGate`}
+                className="mt-2 ml-1 inline-flex h-8 min-w-8 items-center justify-center rounded-full border border-white/40 px-1.5 text-[10px] font-semibold text-white transition hover:bg-white/15"
+              >
+                RG
+                <span className="sr-only">ResearchGate</span>
+              </a>
+            ) : null}
+            {member.orcid ? (
+              <a
+                href={member.orcid}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${member.name} ORCID`}
+                className="mt-2 ml-1 inline-flex h-8 min-w-8 items-center justify-center rounded-full border border-white/40 px-1.5 text-[10px] font-semibold text-white transition hover:bg-white/15"
+              >
+                iD
+                <span className="sr-only">ORCID</span>
               </a>
             ) : null}
           </div>

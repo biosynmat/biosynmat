@@ -42,6 +42,30 @@ export default function TeamPage() {
                 <Linkedin className="h-4 w-4" />
                 <span className="sr-only">LinkedIn</span>
               </a>
+              {piDetails.researchgate ? (
+                <a
+                  href={piDetails.researchgate}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${piDetails.name} ResearchGate`}
+                  className="inline-flex h-9 min-w-9 items-center justify-center rounded-full border border-slate-300 bg-white px-2 text-[11px] font-semibold text-slate-700 transition hover:bg-slate-100"
+                >
+                  RG
+                  <span className="sr-only">ResearchGate</span>
+                </a>
+              ) : null}
+              {piDetails.orcid ? (
+                <a
+                  href={piDetails.orcid}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${piDetails.name} ORCID`}
+                  className="inline-flex h-9 min-w-9 items-center justify-center rounded-full border border-slate-300 bg-white px-2 text-[11px] font-semibold text-slate-700 transition hover:bg-slate-100"
+                >
+                  iD
+                  <span className="sr-only">ORCID</span>
+                </a>
+              ) : null}
               <Link
                 href="/meet-ananya-mishra"
                 className="teal-link inline-flex items-center rounded-full bg-teal-700 px-4 py-2 text-sm font-semibold transition hover:bg-teal-800"

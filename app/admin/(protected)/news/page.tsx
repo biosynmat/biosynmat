@@ -156,6 +156,15 @@ export default function AdminNewsPage() {
             }}
             onUploadError={(uploadError) => setError(uploadError.message)}
           />
+          {editingId && uploadedImageUrl ? (
+            <button
+              type="button"
+              onClick={() => setUploadedImageUrl("")}
+              className="mt-2 inline-flex rounded-full border border-red-300 bg-red-50 px-3 py-1 text-xs font-semibold text-red-700 hover:bg-red-100"
+            >
+              Remove photo
+            </button>
+          ) : null}
           {uploadedImageUrl ? (
             <Image
               src={uploadedImageUrl}

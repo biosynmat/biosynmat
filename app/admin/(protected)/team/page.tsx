@@ -11,6 +11,8 @@ const initialForm = {
   name: "",
   role: "",
   linkedin: "",
+  researchgate: "",
+  orcid: "",
 };
 
 export default function AdminTeamPage() {
@@ -36,6 +38,8 @@ export default function AdminTeamPage() {
           role: String(data.role ?? ""),
           image: String(data.image ?? ""),
           linkedin: data.linkedin ? String(data.linkedin) : "",
+          researchgate: data.researchgate ? String(data.researchgate) : "",
+          orcid: data.orcid ? String(data.orcid) : "",
         } satisfies TeamMemberRecord;
       });
       setItems(records);
@@ -62,7 +66,7 @@ export default function AdminTeamPage() {
     setIsSaving(true);
 
     try {
-      if (!uploadedImageUrl) {
+      if (!uploadedImageUrl && !editingId) {
         throw new Error("Please upload a profile image before saving.");
       }
 
@@ -71,6 +75,8 @@ export default function AdminTeamPage() {
         role: form.role.trim(),
         image: uploadedImageUrl,
         linkedin: form.linkedin.trim(),
+        researchgate: form.researchgate.trim(),
+        orcid: form.orcid.trim(),
       };
 
       if (editingId) {
@@ -98,6 +104,8 @@ export default function AdminTeamPage() {
       name: item.name,
       role: item.role,
       linkedin: item.linkedin ?? "",
+      researchgate: item.researchgate ?? "",
+      orcid: item.orcid ?? "",
     });
     setUploadedImageUrl(item.image);
   };
@@ -139,6 +147,18 @@ export default function AdminTeamPage() {
           onChange={(event) => setForm((prev) => ({ ...prev, linkedin: event.target.value }))}
           className="rounded-lg border border-slate-300 px-3 py-2"
         />
+        <input
+          placeholder="ResearchGate URL"
+          value={form.researchgate}
+          onChange={(event) => setForm((prev) => ({ ...prev, researchgate: event.target.value }))}
+          className="rounded-lg border border-slate-300 px-3 py-2"
+        />
+        <input
+          placeholder="ORCID URL"
+          value={form.orcid}
+          onChange={(event) => setForm((prev) => ({ ...prev, orcid: event.target.value }))}
+          className="rounded-lg border border-slate-300 px-3 py-2 sm:col-span-2"
+        />
 
         <div className="sm:col-span-2 rounded-xl border border-slate-200 bg-slate-50 p-3">
           <p className="mb-2 text-sm font-semibold text-slate-700">Profile image upload</p>
@@ -150,6 +170,15 @@ export default function AdminTeamPage() {
             }}
             onUploadError={(uploadError) => setError(uploadError.message)}
           />
+          {editingId && uploadedImageUrl ? (
+            <button
+              type="button"
+              onClick={() => setUploadedImageUrl("")}
+              className="mt-2 inline-flex rounded-full border border-red-300 bg-red-50 px-3 py-1 text-xs font-semibold text-red-700 hover:bg-red-100"
+            >
+              Remove photo
+            </button>
+          ) : null}
           {uploadedImageUrl ? (
             <Image
               src={uploadedImageUrl}

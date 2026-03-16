@@ -28,11 +28,10 @@ export default function OpportunitiesPage() {
 
           <div className="mt-4 space-y-4 text-sm leading-relaxed text-slate-700">
             <p>
-              Are you interested in our research group? Do supramolecular
-              chemistry and biological systems interest you? Then come join our
-              team. To know about Ph.D. and postdoctoral positions stay updated
-              with our opportunities page. We regularly update our page, so all
-              open positions are advertised here.
+              Interested in becoming part of our research team? We invite
+              motivated candidates to join us. Details are listed on our
+              Opportunities page, which is updated frequently with new
+              openings.
             </p>
             <p className="rounded-xl border border-amber-200 bg-amber-50 p-3 text-amber-900">
               <span className="mb-1 inline-flex items-center gap-1.5 font-semibold">
@@ -40,8 +39,9 @@ export default function OpportunitiesPage() {
                 Important
               </span>
               <br />
-              *Please note emails without the mentioned subject line (see below)
-              may get filtered and you might not receive a reply.
+              *Please ensure that your email includes a clear and relevant
+              subject describing the purpose of your message, as emails without
+              a proper subject may be filtered and might not receive a response.
             </p>
           </div>
 
@@ -55,11 +55,8 @@ export default function OpportunitiesPage() {
                 We currently have no open PhD positions.
               </p>
               <p className="mt-2 text-sm text-slate-800">
-                For any information, please send email with the subject line:
-                <span className="font-semibold">
-                  {" "}
-                  &quot;PhD BioSynMat Lab.&quot;
-                </span>
+                For further information, please contact us via email regarding
+                PhD opportunities in the BioSynMat Lab.
               </p>
             </div>
 
@@ -68,11 +65,10 @@ export default function OpportunitiesPage() {
                 Internship
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-slate-700">
-                If you are interested in pursuing your bachelors or masters
-                internship/thesis in BioSynMat Lab, then we encourage you to
-                submit a 1-paragraph summary of your research interest along
-                with your CV. Please send it via email with the appropriate
-                subject line.
+                Students interested in completing their bachelor&apos;s or
+                master&apos;s internship/thesis at the BioSynMat Lab are
+                encouraged to send a brief summary of their research interests
+                along with their CV via email.
               </p>
             </div>
           </div>
@@ -91,10 +87,10 @@ export default function OpportunitiesPage() {
                 Email
               </p>
               <a
-                href="mailto:ananyam@srmist.edu.in"
+                href="mailto:biosynmat@gmail.com"
                 className="text-sm text-slate-800 underline decoration-slate-300 underline-offset-4"
               >
-                ananyam@srmist.edu.in
+                biosynmat@gmail.com
               </a>
             </div>
             <p className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.1em] text-slate-500">

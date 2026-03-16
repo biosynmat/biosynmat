@@ -64,12 +64,12 @@ export function PublicationGrid({ items }: PublicationGridProps) {
             <>
               <DialogHeader>
                 {selectedPublication.coverImage ? (
-                  <div className="relative mx-auto aspect-[9/16] w-full max-w-[140px] overflow-hidden rounded-xl sm:max-w-[180px]">
+                  <div className="relative mx-auto aspect-[4/5] w-full max-w-[240px] rounded-xl border border-slate-200 bg-slate-100 p-2 sm:max-w-[320px]">
                     <Image
                       src={selectedPublication.coverImage}
                       alt={`${selectedPublication.title} cover`}
                       fill
-                      className="object-cover"
+                      className="object-contain p-2"
                     />
                   </div>
                 ) : null}

@@ -159,13 +159,22 @@ export default function AdminPublicationsPage() {
             }}
             onUploadError={(uploadError) => setError(uploadError.message)}
           />
+          {editingId && uploadedCoverImageUrl ? (
+            <button
+              type="button"
+              onClick={() => setUploadedCoverImageUrl("")}
+              className="mt-2 inline-flex rounded-full border border-red-300 bg-red-50 px-3 py-1 text-xs font-semibold text-red-700 hover:bg-red-100"
+            >
+              Remove photo
+            </button>
+          ) : null}
           {uploadedCoverImageUrl ? (
             <Image
               src={uploadedCoverImageUrl}
               alt="Uploaded publication cover preview"
               width={640}
               height={320}
-              className="mt-3 h-32 w-full rounded-lg border border-slate-200 object-cover sm:w-80"
+              className="mt-3 h-32 w-full rounded-lg border border-slate-200 bg-white object-contain sm:w-80"
             />
           ) : null}
         </div>
@@ -196,7 +205,7 @@ export default function AdminPublicationsPage() {
           {items.map((item) => (
             <article key={item.id} className="rounded-xl border border-slate-200 bg-slate-50 p-3">
               {item.coverImage ? (
-                <Image src={item.coverImage} alt={item.title} width={640} height={320} className="mb-3 h-32 w-full rounded-lg border border-slate-200 object-cover" />
+                <Image src={item.coverImage} alt={item.title} width={640} height={320} className="mb-3 h-32 w-full rounded-lg border border-slate-200 bg-white object-contain" />
               ) : null}
               <p className="text-base font-semibold text-slate-900">{item.title}</p>
               <p className="text-sm text-slate-700">{item.authors}</p>

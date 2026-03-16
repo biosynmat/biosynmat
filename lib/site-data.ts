@@ -14,6 +14,8 @@ export type TeamMember = {
   role: string;
   image: string;
   linkedin?: string;
+  researchgate?: string;
+  orcid?: string;
 };
 
 export type ResearchScheme = {
@@ -73,6 +75,8 @@ export const piDetails = {
   office: "SRM Institute of Science and Technology, Kattankulathur, Chennai",
   image: "/team/ananya.jpeg",
   linkedin: "https://www.linkedin.com/",
+  researchgate: "https://www.researchgate.net/",
+  orcid: "https://orcid.org/",
   bio: [
     "Dr Ananya Mishra is an Assistant Professor (Research) at the Department of Chemistry, SRMIST, Kattankulathur, Chennai since May 2025.",
     "She earned her BSc (Hons.) in Chemistry from Hindu College, University of Delhi. She subsequently joined Jawaharlal Nehru Centre for Advanced Scientific Research (JNCASR), Bangalore, as an Integrated PhD student, where she completed both her masters and doctoral studies under the supervision of Prof. Subi J. George. Her doctoral research focused on supramolecular chemistry with an emphasis on bioinspired self-assembly.",
@@ -108,18 +112,24 @@ export const teamMembers: TeamMember[] = [
     role: "Research Scholar",
     image: "/team/aathila.jpg",
     linkedin: "https://www.linkedin.com/",
+    researchgate: "https://www.researchgate.net/",
+    orcid: "https://orcid.org/",
   },
   {
     name: "Deepthi",
     role: "Research Scholar",
     image: "/team/deepthi.jpg",
     linkedin: "https://www.linkedin.com/",
+    researchgate: "https://www.researchgate.net/",
+    orcid: "https://orcid.org/",
   },
   {
     name: "Jeevi",
     role: "Research Scholar",
     image: "/team/jeevi.jpg",
     linkedin: "https://www.linkedin.com/",
+    researchgate: "https://www.researchgate.net/",
+    orcid: "https://orcid.org/",
   },
 ];
 

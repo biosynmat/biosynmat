@@ -9,6 +9,8 @@ function mapTeamMember(id: string, data: Record<string, unknown>): TeamMemberRec
     role: String(data.role ?? ""),
     image: String(data.image ?? ""),
     linkedin: data.linkedin ? String(data.linkedin) : "",
+    researchgate: data.researchgate ? String(data.researchgate) : "",
+    orcid: data.orcid ? String(data.orcid) : "",
   };
 }
 
@@ -38,11 +40,18 @@ function mapNews(id: string, data: Record<string, unknown>): NewsRecord {
 }
 
 function mapGallery(id: string, data: Record<string, unknown>): GalleryRecord {
+  const images = Array.isArray(data.images)
+    ? data.images.map((item) => String(item)).filter(Boolean)
+    : [];
+  const legacyImage = String(data.image ?? "");
+  const normalizedImages = images.length > 0 ? images : legacyImage ? [legacyImage] : [];
+
   return {
     id,
     title: String(data.title ?? ""),
     date: String(data.date ?? ""),
-    image: String(data.image ?? ""),
+    images: normalizedImages,
+    image: normalizedImages[0] ?? "",
   };
 }
 
