@@ -4,12 +4,13 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import { FormEvent, useState } from "react";
 import { addDoc, collection, deleteDoc, doc, serverTimestamp, updateDoc } from "firebase/firestore";
-import { LoadingIndicator } from "@/components/ui/loading-indicator";
 import type { PublicationRecord } from "@/lib/admin-types";
 import { firebaseDb } from "@/lib/firebase/client";
 import { readPublications } from "@/lib/firebase/public-read";
 import { queryKeys } from "@/lib/query-keys";
 import { UploadThingButton, extractUploadUrl } from "@/lib/uploadthing";
+import { AdminFormWrapper, AdminListWrapper } from "@/components/admin/admin-form-wrapper";
+import { AdminItemActions } from "@/components/admin/admin-item-actions";
 
 const coverToneOptions = [
   "from-cyan-100 to-cyan-50",
@@ -121,11 +122,15 @@ export default function AdminPublicationsPage() {
 
   return (
     <div className="space-y-6">
-      <form onSubmit={handleSave} className="grid gap-3 rounded-2xl border border-slate-200 bg-white p-4 sm:grid-cols-2">
-        <h2 className="text-xl font-semibold text-slate-900 sm:col-span-2">
-          {editingId ? "Edit Publication" : "Add Publication"}
-        </h2>
-
+      <AdminFormWrapper
+        title="Publication"
+        entityName="Publication"
+        editingId={editingId}
+        isSaving={isSaving}
+        errorMessage={errorMessage}
+        onSubmit={handleSave}
+        onCancelEdit={resetForm}
+      >
         <input required placeholder="Title" value={form.title} onChange={(event) => setForm((prev) => ({ ...prev, title: event.target.value }))} className="rounded-lg border border-slate-300 px-3 py-2 sm:col-span-2" />
         <input required placeholder="Authors" value={form.authors} onChange={(event) => setForm((prev) => ({ ...prev, authors: event.target.value }))} className="rounded-lg border border-slate-300 px-3 py-2" />
         <input required type="number" placeholder="Year" value={form.year} onChange={(event) => setForm((prev) => ({ ...prev, year: Number(event.target.value) }))} className="rounded-lg border border-slate-300 px-3 py-2" />
@@ -162,56 +167,28 @@ export default function AdminPublicationsPage() {
         </div>
 
         <textarea required placeholder="Abstract" value={form.abstract} onChange={(event) => setForm((prev) => ({ ...prev, abstract: event.target.value }))} rows={4} className="rounded-lg border border-slate-300 px-3 py-2 sm:col-span-2" />
+      </AdminFormWrapper>
 
-        <button type="submit" disabled={isSaving} className="teal-link sm:col-span-2 inline-flex w-fit rounded-full bg-teal-700 px-4 py-2 text-sm font-semibold hover:bg-teal-800 disabled:opacity-60">
-          {isSaving ? "Saving..." : editingId ? "Update Publication" : "Add Publication"}
-        </button>
-        {editingId ? (
-          <button
-            type="button"
-            onClick={resetForm}
-            className="sm:col-span-2 inline-flex w-fit rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100"
-          >
-            Cancel Edit
-          </button>
-        ) : null}
-      </form>
-
-      {errorMessage ? <p className="text-sm text-red-600">{errorMessage}</p> : null}
-
-      <div className="rounded-2xl border border-slate-200 bg-white p-4">
-        <h2 className="text-xl font-semibold text-slate-900">Existing Publications</h2>
-        {isLoading ? <LoadingIndicator label="Loading publications..." className="mt-2 py-4" /> : null}
-
-        <div className="mt-4 grid gap-3 sm:grid-cols-2">
-          {items.map((item) => (
-            <article key={item.id} className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-              {item.coverImage ? (
-                <Image src={item.coverImage} alt={item.title} width={640} height={320} className="mb-3 h-32 w-full rounded-lg border border-slate-200 bg-white object-contain" />
-              ) : null}
-              <p className="text-base font-semibold text-slate-900">{item.title}</p>
-              <p className="text-sm text-slate-700">{item.authors}</p>
-              <p className="text-sm text-slate-600">{item.venue ? `${item.venue} • ${item.year}` : String(item.year)}</p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                <button
-                  type="button"
-                  onClick={() => handleEdit(item)}
-                  className="rounded-full border border-slate-300 bg-white px-3 py-1 text-xs font-semibold text-slate-700 hover:bg-slate-100"
-                >
-                  Edit
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleDelete(item.id)}
-                  className="rounded-full border border-red-300 bg-red-50 px-3 py-1 text-xs font-semibold text-red-700"
-                >
-                  Remove
-                </button>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
+      <AdminListWrapper
+        title="Existing Publications"
+        isLoading={isLoading}
+        loadingLabel="Loading publications..."
+      >
+        {items.map((item) => (
+          <article key={item.id} className="rounded-xl border border-slate-200 bg-slate-50 p-3">
+            {item.coverImage ? (
+              <Image src={item.coverImage} alt={item.title} width={640} height={320} className="mb-3 h-32 w-full rounded-lg border border-slate-200 bg-white object-contain" />
+            ) : null}
+            <p className="text-base font-semibold text-slate-900">{item.title}</p>
+            <p className="text-sm text-slate-700">{item.authors}</p>
+            <p className="text-sm text-slate-600">{item.venue ? `${item.venue} • ${item.year}` : String(item.year)}</p>
+            <AdminItemActions
+              onEdit={() => handleEdit(item)}
+              onDelete={() => handleDelete(item.id)}
+            />
+          </article>
+        ))}
+      </AdminListWrapper>
     </div>
   );
 }

@@ -37,7 +37,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
             <h2 className="mb-4 text-xl font-semibold text-slate-900">
               Research Focus
             </h2>
@@ -52,7 +52,7 @@ export default function HomePage() {
                 Programmable nanoparticle-enabled compartment behavior
               </li>
             </ul>
-          </div> */}
+          </div>
         </div>
       </section>
 

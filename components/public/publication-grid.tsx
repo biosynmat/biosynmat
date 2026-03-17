@@ -159,7 +159,7 @@ export function PublicationGrid({ items }: PublicationGridProps) {
                 </p>
               </div>
 
-              <DialogFooter>
+              <DialogFooter className="bg-white">
                 {selectedPublication.url ? (
                   <a
                     href={selectedPublication.url}

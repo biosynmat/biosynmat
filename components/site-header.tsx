@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { motion } from "motion/react";
 import type { LucideIcon } from "lucide-react";
 import {
   BriefcaseBusiness,
@@ -28,6 +29,8 @@ import {
 export function SiteHeader() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [pendingHref, setPendingHref] = useState<string | null>(null);
+
   const navIcons: Record<string, LucideIcon> = {
     "/": Home,
     "/meet-ananya-mishra": UserRound,
@@ -39,6 +42,11 @@ export function SiteHeader() {
     "/opportunities": BriefcaseBusiness,
   };
 
+  // Reset pending state once the route has actually changed
+  useEffect(() => {
+    setPendingHref(null);
+  }, [pathname]);
+
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
     if (href === "/meet-ananya-mishra")
@@ -46,6 +54,12 @@ export function SiteHeader() {
     if (href === "/opportunities")
       return pathname === "/opportunities" || pathname === "/oppturnities";
     return pathname === href || pathname.startsWith(`${href}/`);
+  };
+
+  // Use pending click target if available, otherwise fall back to pathname
+  const isHighlighted = (href: string) => {
+    if (pendingHref !== null) return href === pendingHref;
+    return isActive(href);
   };
 
   useEffect(() => {
@@ -113,17 +127,26 @@ export function SiteHeader() {
             <ul className="flex flex-wrap items-center justify-end gap-1">
               {navLinks.map((item) => {
                 const Icon = navIcons[item.href] ?? Home;
+                const active = isHighlighted(item.href);
                 return (
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className={`inline-flex rounded-full items-center justify-center px-4 py-2.5 text-base font-medium transition ${
-                        isActive(item.href)
-                          ? "teal-link bg-teal-700 shadow-sm"
+                      onClick={() => setPendingHref(item.href)}
+                      className={`relative inline-flex rounded-full items-center justify-center px-4 py-2.5 text-base font-medium transition-colors ${
+                        active
+                          ? "teal-link"
                           : "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
                       }`}
                     >
-                      <span className="inline-flex items-center justify-center gap-1.5 text-inherit">
+                      {active ? (
+                        <motion.span
+                          layoutId="nav-active-pill"
+                          className="absolute inset-0 rounded-full bg-teal-700 shadow-sm"
+                          transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                        />
+                      ) : null}
+                      <span className="relative z-10 inline-flex items-center justify-center gap-1.5 text-inherit">
                         <Icon className="h-4 w-4 fill-none" />
                         {item.label}
                       </span>

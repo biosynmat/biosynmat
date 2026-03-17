@@ -4,19 +4,19 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import { FormEvent, useState } from "react";
 import { addDoc, collection, deleteDoc, doc, serverTimestamp, updateDoc } from "firebase/firestore";
-import { LoadingIndicator } from "@/components/ui/loading-indicator";
 import type { GalleryRecord } from "@/lib/admin-types";
 import { firebaseDb } from "@/lib/firebase/client";
 import { readGallery } from "@/lib/firebase/public-read";
 import { queryKeys } from "@/lib/query-keys";
 import { UploadThingButton, extractUploadUrls } from "@/lib/uploadthing";
 import { toDateInputValue } from "@/lib/utils";
+import { AdminFormWrapper, AdminListWrapper } from "@/components/admin/admin-form-wrapper";
+import { AdminItemActions } from "@/components/admin/admin-item-actions";
 
 const initialForm = {
   title: "",
   date: "",
 };
-
 
 export default function AdminGalleryPage() {
   const [form, setForm] = useState(initialForm);
@@ -100,11 +100,15 @@ export default function AdminGalleryPage() {
 
   return (
     <div className="space-y-6">
-      <form onSubmit={handleSave} className="grid gap-3 rounded-2xl border border-slate-200 bg-white p-4 sm:grid-cols-2">
-        <h2 className="text-xl font-semibold text-slate-900 sm:col-span-2">
-          {editingId ? "Edit Showcase" : "Add Showcase"}
-        </h2>
-
+      <AdminFormWrapper
+        title="Showcase"
+        entityName="Showcase"
+        editingId={editingId}
+        isSaving={isSaving}
+        errorMessage={errorMessage}
+        onSubmit={handleSave}
+        onCancelEdit={resetForm}
+      >
         <input
           required
           placeholder="Image Title"
@@ -157,68 +161,37 @@ export default function AdminGalleryPage() {
             </div>
           ) : null}
         </div>
+      </AdminFormWrapper>
 
-        <button
-          type="submit"
-          disabled={isSaving}
-          className="teal-link sm:col-span-2 inline-flex w-fit rounded-full bg-teal-700 px-4 py-2 text-sm font-semibold hover:bg-teal-800 disabled:opacity-60"
-        >
-          {isSaving ? "Saving..." : editingId ? "Update Showcase" : "Add Showcase"}
-        </button>
-        {editingId ? (
-          <button
-            type="button"
-            onClick={resetForm}
-            className="sm:col-span-2 inline-flex w-fit rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100"
-          >
-            Cancel Edit
-          </button>
-        ) : null}
-      </form>
-
-      {errorMessage ? <p className="text-sm text-red-600">{errorMessage}</p> : null}
-
-      <div className="rounded-2xl border border-slate-200 bg-white p-4">
-        <h2 className="text-xl font-semibold text-slate-900">Existing Gallery Showcases</h2>
-        {isLoading ? <LoadingIndicator label="Loading gallery items..." className="mt-2 py-4" /> : null}
-
-        <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((item) => (
-            <article key={item.id} className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-              {item.images.length > 0 ? (
-                <Image
-                  src={item.images[0] ?? ""}
-                  alt={item.title}
-                  width={640}
-                  height={320}
-                  className="mb-3 h-40 w-full rounded-lg border border-slate-200 object-cover"
-                />
-              ) : null}
-              <p className="text-base font-semibold text-slate-900">{item.title}</p>
-              <p className="text-sm text-slate-600">{item.date}</p>
-              <p className="text-xs font-medium uppercase tracking-[0.1em] text-slate-500">
-                {item.images.length} {item.images.length === 1 ? "image" : "images"}
-              </p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                <button
-                  type="button"
-                  onClick={() => handleEdit(item)}
-                  className="rounded-full border border-slate-300 bg-white px-3 py-1 text-xs font-semibold text-slate-700 hover:bg-slate-100"
-                >
-                  Edit
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleDelete(item.id)}
-                  className="rounded-full border border-red-300 bg-red-50 px-3 py-1 text-xs font-semibold text-red-700"
-                >
-                  Remove
-                </button>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
+      <AdminListWrapper
+        title="Existing Gallery Showcases"
+        isLoading={isLoading}
+        loadingLabel="Loading gallery items..."
+        gridCols="sm:grid-cols-2 lg:grid-cols-3"
+      >
+        {items.map((item) => (
+          <article key={item.id} className="rounded-xl border border-slate-200 bg-slate-50 p-3">
+            {item.images.length > 0 ? (
+              <Image
+                src={item.images[0] ?? ""}
+                alt={item.title}
+                width={640}
+                height={320}
+                className="mb-3 h-40 w-full rounded-lg border border-slate-200 object-cover"
+              />
+            ) : null}
+            <p className="text-base font-semibold text-slate-900">{item.title}</p>
+            <p className="text-sm text-slate-600">{item.date}</p>
+            <p className="text-xs font-medium uppercase tracking-[0.1em] text-slate-500">
+              {item.images.length} {item.images.length === 1 ? "image" : "images"}
+            </p>
+            <AdminItemActions
+              onEdit={() => handleEdit(item)}
+              onDelete={() => handleDelete(item.id)}
+            />
+          </article>
+        ))}
+      </AdminListWrapper>
     </div>
   );
 }

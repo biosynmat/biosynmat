@@ -98,7 +98,11 @@ export function GalleryFeed({ items }: GalleryFeedProps) {
             <div className="max-h-[58vh] overflow-auto rounded-xl bg-slate-100 p-2 sm:max-h-[68vh]">
               {selected.images.length > 0 ? (
                 <Image
-                  src={selected.images[activeImageIndex] ?? selected.images[0] ?? ""}
+                  src={
+                    selected.images[activeImageIndex] ??
+                    selected.images[0] ??
+                    ""
+                  }
                   alt={selected.title}
                   width={1600}
                   height={1000}
@@ -132,18 +136,21 @@ export function GalleryFeed({ items }: GalleryFeedProps) {
               </div>
             ) : null}
 
-            <div className="mt-4">
+            <div className="mt-4 gap-1">
               <p className="text-lg font-semibold text-slate-900">
                 {selected.title}
               </p>
-              <p className="mt-1 inline-flex items-center gap-1.5 text-sm text-slate-600">
-                <CalendarDays className="h-4 w-4" />
-                {selected.date}
-              </p>
-              <p className="mt-1 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">
-                <Images className="h-3.5 w-3.5" />
-                {selected.images.length} {selected.images.length === 1 ? "image" : "images"}
-              </p>
+              <div className="gap-2 flex flex-row">
+                <p className="mt-1 inline-flex items-center gap-1.5 text-sm text-slate-600">
+                  <CalendarDays className="h-4 w-4" />
+                  {selected.date}
+                </p>
+                <p className="mt-1 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">
+                  <Images className="h-3.5 w-3.5" />
+                  {selected.images.length}{" "}
+                  {selected.images.length === 1 ? "image" : "images"}
+                </p>
+              </div>
             </div>
           </DialogContent>
         ) : null}
