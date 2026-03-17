@@ -1,10 +1,12 @@
 "use client";
 
+import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { CalendarDays } from "lucide-react";
-import { useEffect, useState } from "react";
-import type { NewsRecord } from "@/lib/admin-types";
+import { queryKeys } from "@/lib/query-keys";
 import { readNews } from "@/lib/firebase/public-read";
+import { LoadingIndicator } from "@/components/ui/loading-indicator";
+import { EmptyState } from "@/components/ui/empty-state";
 import {
   Dialog,
   DialogContent,
@@ -19,30 +21,17 @@ type NewsFeedProps = {
 };
 
 export function NewsFeed({ limitCount }: NewsFeedProps) {
-  const [items, setItems] = useState<NewsRecord[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const load = async () => {
-      try {
-        const records = await readNews(limitCount);
-        setItems(records);
-      } catch {
-        setItems([]);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    load();
-  }, [limitCount]);
+  const { data: items = [], isLoading } = useQuery({
+    queryKey: queryKeys.news(limitCount),
+    queryFn: () => readNews(limitCount),
+  });
 
   if (isLoading) {
-    return <p className="text-sm text-slate-600">Loading news...</p>;
+    return <LoadingIndicator label="Loading news..." />;
   }
 
   if (items.length === 0) {
-    return <p className="text-sm text-slate-600">No news added yet.</p>;
+    return <EmptyState message="No news added yet." />;
   }
 
   return (

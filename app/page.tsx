@@ -4,8 +4,8 @@ import { NewsFeed } from "@/components/public/news-feed";
 
 export default function HomePage() {
   return (
-    <div className="py-10 sm:py-14">
-      <section className="section-shell">
+    <div className="py-10 px-5 sm:py-14">
+      <section>
         <div className="grid gap-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10 lg:grid-cols-[1.2fr_0.8fr]">
           <div>
             <p className="mb-4 inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-700">
@@ -56,7 +56,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section-shell mt-12 sm:mt-16">
+      <section className="mt-12  sm:mt-16">
         <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10">
           <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
             <div>
@@ -79,7 +79,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section-shell mt-12 sm:mt-16">
+      <section className=" mt-12 sm:mt-16 ">
         <div className="rounded-3xl border border-teal-100 bg-teal-50 p-6 sm:p-10">
           <h2 className="mb-3 text-2xl font-semibold text-slate-900">
             Join the BioSynMat team
@@ -98,7 +98,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section-shell mt-12 sm:mt-16">
+      <section className="mt-12 sm:mt-16">
         <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10">
           <div className="mb-6 flex items-center justify-between gap-3">
             <h2 className="text-2xl font-semibold text-slate-900">

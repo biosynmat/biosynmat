@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function OpportunitiesPage() {
   return (
-    <div className="section-shell py-8 sm:py-12 lg:py-14">
+    <div className="px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-14">
       <div className="mb-6 sm:mb-8">
         <h1 className="text-4xl font-semibold text-slate-900">Opportunities</h1>
       </div>

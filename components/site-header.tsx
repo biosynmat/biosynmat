@@ -15,9 +15,15 @@ import {
   UserRound,
   Users,
   Menu,
-  X,
 } from "lucide-react";
 import { navLinks } from "@/lib/site-data";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetFooter,
+} from "@/components/ui/sheet";
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -131,36 +137,12 @@ export function SiteHeader() {
       </header>
 
       {isMobileMenuOpen ? (
-        <div className="md:hidden">
-          <button
-            type="button"
-            aria-label="Close navigation menu"
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="fixed inset-0 z-[70] bg-black/80 backdrop-blur-[1px]"
-          />
-
-          <aside
-            id="mobile-menu-sheet"
-            className="fixed right-0 top-0 z-[80] flex h-screen w-[86vw] max-w-sm flex-col border-l border-slate-200 bg-white p-5 shadow-2xl"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Mobile navigation menu"
-          >
-            <div className="mb-5 flex items-center justify-between">
-              <span className="text-sm font-semibold tracking-[0.14em] text-slate-800">
-                MENU
-              </span>
-              <button
-                type="button"
-                onClick={() => setIsMobileMenuOpen(false)}
-                aria-label="Close navigation menu"
-                className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white p-2.5 text-slate-700 transition hover:bg-slate-100"
-              >
-                <X className="h-5 w-5 fill-none" />
-              </button>
-            </div>
-
-            <nav aria-label="Mobile Primary" className="flex-1">
+        <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+          <SheetContent side="right" showCloseButton>
+            <SheetHeader>
+              <SheetTitle>MENU</SheetTitle>
+            </SheetHeader>
+            <nav aria-label="Mobile Primary" className="flex-1 px-5">
               <ul className="space-y-2">
                 {navLinks.map((item) => {
                   const Icon = navIcons[item.href] ?? Home;
@@ -183,8 +165,11 @@ export function SiteHeader() {
                 })}
               </ul>
             </nav>
-          </aside>
-        </div>
+            <SheetFooter>
+              {/* Add any footer actions here if needed */}
+            </SheetFooter>
+          </SheetContent>
+        </Sheet>
       ) : null}
     </>
   );

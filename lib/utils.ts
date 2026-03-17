@@ -67,7 +67,9 @@ function parseDisplayDate(value: string | undefined | null): number | null {
   return new Date(year, month, 1).getTime();
 }
 
-export function sortByDisplayDateDesc<T extends { date: string }>(items: T[]): T[] {
+export function sortByDisplayDateDesc<T extends { date: string }>(
+  items: T[],
+): T[] {
   return items
     .map((item, index) => ({
       item,
@@ -87,4 +89,25 @@ export function sortByDisplayDateDesc<T extends { date: string }>(items: T[]): T
       return a.index - b.index;
     })
     .map((entry) => entry.item);
+}
+
+/**
+ * Convert a display-friendly date string (e.g. "March 2026" or ISO)
+ * into the `YYYY-MM-DD` format expected by `<input type="date">`.
+ */
+export function toDateInputValue(value: string): string {
+  const raw = value.trim();
+  if (!raw) {
+    return "";
+  }
+  if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) {
+    return raw;
+  }
+
+  const parsed = Date.parse(raw);
+  if (!Number.isNaN(parsed)) {
+    return new Date(parsed).toISOString().slice(0, 10);
+  }
+
+  return "";
 }

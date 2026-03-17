@@ -1,78 +1,39 @@
 "use client";
 
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
-import { FormEvent, useCallback, useEffect, useState } from "react";
-import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query, serverTimestamp, updateDoc } from "firebase/firestore";
+import { FormEvent, useState } from "react";
+import { addDoc, collection, deleteDoc, doc, serverTimestamp, updateDoc } from "firebase/firestore";
+import { LoadingIndicator } from "@/components/ui/loading-indicator";
 import type { GalleryRecord } from "@/lib/admin-types";
 import { firebaseDb } from "@/lib/firebase/client";
-import { sortByDisplayDateDesc } from "@/lib/utils";
-import { UploadThingButton, extractUploadUrls } from "@/utils/uploadthing";
+import { readGallery } from "@/lib/firebase/public-read";
+import { queryKeys } from "@/lib/query-keys";
+import { UploadThingButton, extractUploadUrls } from "@/lib/uploadthing";
+import { toDateInputValue } from "@/lib/utils";
 
 const initialForm = {
   title: "",
   date: "",
 };
 
-function toDateInputValue(value: string): string {
-  const raw = value.trim();
-  if (!raw) {
-    return "";
-  }
-  if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) {
-    return raw;
-  }
-
-  const parsed = Date.parse(raw);
-  if (!Number.isNaN(parsed)) {
-    return new Date(parsed).toISOString().slice(0, 10);
-  }
-
-  return "";
-}
 
 export default function AdminGalleryPage() {
-  const [items, setItems] = useState<GalleryRecord[]>([]);
   const [form, setForm] = useState(initialForm);
   const [uploadedImageUrls, setUploadedImageUrls] = useState<string[]>([]);
   const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
+  const queryClient = useQueryClient();
 
-  const normalizeImages = useCallback((data: Record<string, unknown>) => {
-    const images = Array.isArray(data.images)
-      ? data.images.map((item) => String(item)).filter(Boolean)
-      : [];
-    const legacyImage = String(data.image ?? "");
-    return images.length > 0 ? images : legacyImage ? [legacyImage] : [];
-  }, []);
-
-  const loadItems = useCallback(async () => {
-    setIsLoading(true);
-    setError("");
-    try {
-      const q = query(collection(firebaseDb, "gallery_images"), orderBy("createdAt", "desc"));
-      const snapshot = await getDocs(q);
-      const records = snapshot.docs.map((record) => {
-        const data = record.data();
-        return {
-          id: record.id,
-          title: String(data.title ?? ""),
-          date: String(data.date ?? ""),
-          images: normalizeImages(data),
-        } satisfies GalleryRecord;
-      });
-      setItems(sortByDisplayDateDesc(records));
-    } catch (loadError) {
-      setError((loadError as Error).message);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [normalizeImages]);
-
-  useEffect(() => {
-    loadItems();
-  }, [loadItems]);
+  const {
+    data: items = [],
+    isLoading,
+    error: queryError,
+  } = useQuery({
+    queryKey: queryKeys.gallery,
+    queryFn: readGallery,
+  });
 
   const resetForm = () => {
     setForm(initialForm);
@@ -107,7 +68,7 @@ export default function AdminGalleryPage() {
       }
 
       resetForm();
-      await loadItems();
+      await queryClient.invalidateQueries({ queryKey: queryKeys.gallery });
     } catch (saveError) {
       setError((saveError as Error).message);
     } finally {
@@ -129,11 +90,13 @@ export default function AdminGalleryPage() {
     setError("");
     try {
       await deleteDoc(doc(firebaseDb, "gallery_images", id));
-      await loadItems();
+      await queryClient.invalidateQueries({ queryKey: queryKeys.gallery });
     } catch (deleteError) {
       setError((deleteError as Error).message);
     }
   };
+
+  const errorMessage = error || (queryError instanceof Error ? queryError.message : "");
 
   return (
     <div className="space-y-6">
@@ -213,11 +176,11 @@ export default function AdminGalleryPage() {
         ) : null}
       </form>
 
-      {error ? <p className="text-sm text-red-600">{error}</p> : null}
+      {errorMessage ? <p className="text-sm text-red-600">{errorMessage}</p> : null}
 
       <div className="rounded-2xl border border-slate-200 bg-white p-4">
         <h2 className="text-xl font-semibold text-slate-900">Existing Gallery Showcases</h2>
-        {isLoading ? <p className="mt-3 text-sm text-slate-600">Loading...</p> : null}
+        {isLoading ? <LoadingIndicator label="Loading gallery items..." className="mt-2 py-4" /> : null}
 
         <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((item) => (

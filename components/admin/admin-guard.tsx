@@ -3,6 +3,7 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { LoadingIndicator } from "@/components/ui/loading-indicator";
 import { firebaseAuth } from "@/lib/firebase/client";
 
 export function AdminGuard({ children }: { children: React.ReactNode }) {
@@ -24,8 +25,10 @@ export function AdminGuard({ children }: { children: React.ReactNode }) {
 
   if (isLoading) {
     return (
-      <div className="section-shell py-12">
-        <div className="rounded-2xl border border-slate-200 bg-white p-6 text-sm text-slate-600">Checking admin session...</div>
+      <div className="px-4 py-12 sm:px-6 lg:px-8">
+        <div className="rounded-2xl border border-slate-200 bg-white p-6">
+          <LoadingIndicator label="Checking admin session..." className="py-2" />
+        </div>
       </div>
     );
   }

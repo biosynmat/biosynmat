@@ -1,31 +1,21 @@
-﻿"use client";
+"use client";
 
-import { useEffect, useMemo, useState } from "react";
-import type { PublicationRecord } from "@/lib/admin-types";
+import { useQuery } from "@tanstack/react-query";
+import { useMemo } from "react";
 import { readPublications } from "@/lib/firebase/public-read";
+import { LoadingIndicator } from "@/components/ui/loading-indicator";
+import { EmptyState } from "@/components/ui/empty-state";
+import { queryKeys } from "@/lib/query-keys";
 
 type HomePublicationsPreviewProps = {
   limitCount?: number;
 };
 
 export function HomePublicationsPreview({ limitCount = 3 }: HomePublicationsPreviewProps) {
-  const [items, setItems] = useState<PublicationRecord[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const load = async () => {
-      try {
-        const records = await readPublications();
-        setItems(records);
-      } catch {
-        setItems([]);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    load();
-  }, [limitCount]);
+  const { data: items = [], isLoading } = useQuery({
+    queryKey: queryKeys.publications,
+    queryFn: readPublications,
+  });
 
   const visibleItems = useMemo(() => {
     if (items.length === 0) {
@@ -40,11 +30,11 @@ export function HomePublicationsPreview({ limitCount = 3 }: HomePublicationsPrev
   const durationSeconds = Math.max(visibleItems.length * 4, limitCount * 4, 14);
 
   if (isLoading) {
-    return <p className="text-sm text-slate-600">Loading publications...</p>;
+    return <LoadingIndicator label="Loading publications..." />;
   }
 
   if (visibleItems.length === 0) {
-    return <p className="text-sm text-slate-600">No publications added yet.</p>;
+    return <EmptyState message="No publications added yet." />;
   }
 
   return (

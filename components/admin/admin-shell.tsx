@@ -22,7 +22,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <div className="section-shell py-8 sm:py-10">
+    <div className="px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
       <div className="mb-6 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:flex sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-semibold text-slate-900">Admin Panel</h1>

@@ -1,12 +1,17 @@
 "use client";
 
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
-import { FormEvent, useEffect, useState } from "react";
-import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query, serverTimestamp, updateDoc } from "firebase/firestore";
+import { FormEvent, useState } from "react";
+import { addDoc, collection, deleteDoc, doc, serverTimestamp, updateDoc } from "firebase/firestore";
+import { LoadingIndicator } from "@/components/ui/loading-indicator";
 import { TiptapEditor } from "@/components/admin/tiptap-editor";
 import type { NewsRecord } from "@/lib/admin-types";
 import { firebaseDb } from "@/lib/firebase/client";
-import { UploadThingButton, extractUploadUrl } from "@/utils/uploadthing";
+import { readNews } from "@/lib/firebase/public-read";
+import { queryKeys } from "@/lib/query-keys";
+import { UploadThingButton, extractUploadUrl } from "@/lib/uploadthing";
+import { toDateInputValue } from "@/lib/utils";
 
 const initialForm = {
   title: "",
@@ -15,60 +20,23 @@ const initialForm = {
   contentHtml: "<p>Write the news content here...</p>",
 };
 
-function toDateInputValue(value: string): string {
-  const raw = value.trim();
-  if (!raw) {
-    return "";
-  }
-  if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) {
-    return raw;
-  }
-
-  const parsed = Date.parse(raw);
-  if (!Number.isNaN(parsed)) {
-    return new Date(parsed).toISOString().slice(0, 10);
-  }
-
-  return "";
-}
 
 export default function AdminNewsPage() {
-  const [items, setItems] = useState<NewsRecord[]>([]);
   const [form, setForm] = useState(initialForm);
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
   const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
+  const queryClient = useQueryClient();
 
-  const loadItems = async () => {
-    setIsLoading(true);
-    setError("");
-    try {
-      const q = query(collection(firebaseDb, "news"), orderBy("createdAt", "desc"));
-      const snapshot = await getDocs(q);
-      const records = snapshot.docs.map((record) => {
-        const data = record.data();
-        return {
-          id: record.id,
-          title: String(data.title ?? ""),
-          date: String(data.date ?? ""),
-          summary: String(data.summary ?? ""),
-          contentHtml: String(data.contentHtml ?? ""),
-          image: data.image ? String(data.image) : "",
-        } satisfies NewsRecord;
-      });
-      setItems(records);
-    } catch (loadError) {
-      setError((loadError as Error).message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    loadItems();
-  }, []);
+  const {
+    data: items = [],
+    isLoading,
+    error: queryError,
+  } = useQuery({
+    queryKey: queryKeys.news(),
+    queryFn: () => readNews(),
+  });
 
   const resetForm = () => {
     setForm(initialForm);
@@ -100,7 +68,7 @@ export default function AdminNewsPage() {
       }
 
       resetForm();
-      await loadItems();
+      await queryClient.invalidateQueries({ queryKey: queryKeys.news() });
     } catch (saveError) {
       setError((saveError as Error).message);
     } finally {
@@ -124,11 +92,13 @@ export default function AdminNewsPage() {
     setError("");
     try {
       await deleteDoc(doc(firebaseDb, "news", id));
-      await loadItems();
+      await queryClient.invalidateQueries({ queryKey: queryKeys.news() });
     } catch (deleteError) {
       setError((deleteError as Error).message);
     }
   };
+
+  const errorMessage = error || (queryError instanceof Error ? queryError.message : "");
 
   return (
     <div className="space-y-6">
@@ -212,11 +182,11 @@ export default function AdminNewsPage() {
         ) : null}
       </form>
 
-      {error ? <p className="text-sm text-red-600">{error}</p> : null}
+      {errorMessage ? <p className="text-sm text-red-600">{errorMessage}</p> : null}
 
       <div className="rounded-2xl border border-slate-200 bg-white p-4">
         <h2 className="text-xl font-semibold text-slate-900">Existing News</h2>
-        {isLoading ? <p className="mt-3 text-sm text-slate-600">Loading...</p> : null}
+        {isLoading ? <LoadingIndicator label="Loading news..." className="mt-2 py-4" /> : null}
 
         <div className="mt-4 space-y-3">
           {items.map((item) => (

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PageHeader } from "@/components/ui/page-header";
 import { GalleryFeedLoader } from "@/components/public/gallery-feed-loader";
 
 export const metadata: Metadata = {
@@ -7,14 +8,11 @@ export const metadata: Metadata = {
 
 export default function GalleryPage() {
   return (
-    <div className="section-shell py-10 sm:py-14">
-      <div className="mb-8">
-        <h1 className="text-4xl font-semibold text-slate-900">Gallery</h1>
-        <p className="mt-3 max-w-3xl text-slate-700">
-          Latest images from BioSynMat lab activities, research snapshots, and academic events.
-        </p>
-      </div>
-
+    <div className="px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
+      <PageHeader
+        title="Gallery"
+        description="Latest images from BioSynMat lab activities, research snapshots, and academic events."
+      />
       <GalleryFeedLoader />
     </div>
   );

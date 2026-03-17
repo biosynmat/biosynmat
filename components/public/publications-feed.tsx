@@ -1,35 +1,24 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { PublicationGrid } from "@/components/publication-grid";
-import type { PublicationRecord } from "@/lib/admin-types";
+import { useQuery } from "@tanstack/react-query";
+import { PublicationGrid } from "@/components/public/publication-grid";
+import { LoadingIndicator } from "@/components/ui/loading-indicator";
+import { EmptyState } from "@/components/ui/empty-state";
 import { readPublications } from "@/lib/firebase/public-read";
+import { queryKeys } from "@/lib/query-keys";
 
 export function PublicationsFeed() {
-  const [items, setItems] = useState<PublicationRecord[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const load = async () => {
-      try {
-        const records = await readPublications();
-        setItems(records);
-      } catch {
-        setItems([]);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    load();
-  }, []);
+  const { data: items = [], isLoading } = useQuery({
+    queryKey: queryKeys.publications,
+    queryFn: readPublications,
+  });
 
   if (isLoading) {
-    return <p className="text-sm text-slate-600">Loading publications...</p>;
+    return <LoadingIndicator label="Loading publications..." />;
   }
 
   if (items.length === 0) {
-    return <p className="text-sm text-slate-600">No publications added yet.</p>;
+    return <EmptyState message="No publications added yet." />;
   }
 
   return <PublicationGrid items={items} />;

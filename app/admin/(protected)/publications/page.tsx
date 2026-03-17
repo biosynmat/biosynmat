@@ -1,11 +1,15 @@
 "use client";
 
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
-import { FormEvent, useEffect, useState } from "react";
-import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query, serverTimestamp, updateDoc } from "firebase/firestore";
+import { FormEvent, useState } from "react";
+import { addDoc, collection, deleteDoc, doc, serverTimestamp, updateDoc } from "firebase/firestore";
+import { LoadingIndicator } from "@/components/ui/loading-indicator";
 import type { PublicationRecord } from "@/lib/admin-types";
 import { firebaseDb } from "@/lib/firebase/client";
-import { UploadThingButton, extractUploadUrl } from "@/utils/uploadthing";
+import { readPublications } from "@/lib/firebase/public-read";
+import { queryKeys } from "@/lib/query-keys";
+import { UploadThingButton, extractUploadUrl } from "@/lib/uploadthing";
 
 const coverToneOptions = [
   "from-cyan-100 to-cyan-50",
@@ -30,46 +34,22 @@ function getRandomCoverTone() {
 }
 
 export default function AdminPublicationsPage() {
-  const [items, setItems] = useState<PublicationRecord[]>([]);
   const [form, setForm] = useState(initialForm);
   const [uploadedCoverImageUrl, setUploadedCoverImageUrl] = useState("");
   const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editingCoverTone, setEditingCoverTone] = useState<string | null>(null);
+  const queryClient = useQueryClient();
 
-  const loadItems = async () => {
-    setIsLoading(true);
-    setError("");
-    try {
-      const q = query(collection(firebaseDb, "publications"), orderBy("createdAt", "desc"));
-      const snapshot = await getDocs(q);
-      const records = snapshot.docs.map((record) => {
-        const data = record.data();
-        return {
-          id: record.id,
-          title: String(data.title ?? ""),
-          authors: String(data.authors ?? ""),
-          venue: String(data.venue ?? ""),
-          year: Number(data.year ?? 0),
-          abstract: String(data.abstract ?? ""),
-          url: String(data.url ?? ""),
-          coverTone: String(data.coverTone ?? "from-slate-100 to-slate-50"),
-          coverImage: data.coverImage ? String(data.coverImage) : "",
-        } satisfies PublicationRecord;
-      });
-      setItems(records);
-    } catch (loadError) {
-      setError((loadError as Error).message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    loadItems();
-  }, []);
+  const {
+    data: items = [],
+    isLoading,
+    error: queryError,
+  } = useQuery({
+    queryKey: queryKeys.publications,
+    queryFn: readPublications,
+  });
 
   const resetForm = () => {
     setForm(initialForm);
@@ -105,7 +85,7 @@ export default function AdminPublicationsPage() {
       }
 
       resetForm();
-      await loadItems();
+      await queryClient.invalidateQueries({ queryKey: queryKeys.publications });
     } catch (saveError) {
       setError((saveError as Error).message);
     } finally {
@@ -131,11 +111,13 @@ export default function AdminPublicationsPage() {
     setError("");
     try {
       await deleteDoc(doc(firebaseDb, "publications", id));
-      await loadItems();
+      await queryClient.invalidateQueries({ queryKey: queryKeys.publications });
     } catch (deleteError) {
       setError((deleteError as Error).message);
     }
   };
+
+  const errorMessage = error || (queryError instanceof Error ? queryError.message : "");
 
   return (
     <div className="space-y-6">
@@ -195,11 +177,11 @@ export default function AdminPublicationsPage() {
         ) : null}
       </form>
 
-      {error ? <p className="text-sm text-red-600">{error}</p> : null}
+      {errorMessage ? <p className="text-sm text-red-600">{errorMessage}</p> : null}
 
       <div className="rounded-2xl border border-slate-200 bg-white p-4">
         <h2 className="text-xl font-semibold text-slate-900">Existing Publications</h2>
-        {isLoading ? <p className="mt-3 text-sm text-slate-600">Loading...</p> : null}
+        {isLoading ? <LoadingIndicator label="Loading publications..." className="mt-2 py-4" /> : null}
 
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
           {items.map((item) => (
