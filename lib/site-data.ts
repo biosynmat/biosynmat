@@ -22,7 +22,7 @@ export type ResearchScheme = {
   id: string;
   title: string;
   summary: string;
-  highlights: string[];
+  image: string;
 };
 
 export type Publication = {
@@ -75,7 +75,7 @@ export const piDetails = {
   office: "SRM Institute of Science and Technology, Kattankulathur, Chennai",
   image: "/team/ananya.jpeg",
   linkedin: "https://www.linkedin.com/",
-  researchgate: "https://www.researchgate.net/",
+  researchgate: "https://www.researchgate.net/profile/Ananya-Mishra-48",
   orcid: "https://orcid.org/",
   bio: [
     "Dr Ananya Mishra is an Assistant Professor (Research) at the Department of Chemistry, SRMIST, Kattankulathur, Chennai since May 2025.",
@@ -140,22 +140,14 @@ export const researchSchemes: ResearchScheme[] = [
       "Mimicking Natural Cell to Cell Communication Using Synthetic Protocells",
     summary:
       "Design synthetic compartments that exchange molecular signals to emulate biological communication behavior with tunable control over timing and selectivity.",
-    highlights: [
-      "Build nanoparticle-based protocells with controllable membrane permeability",
-      "Implement sender-receiver signaling motifs in synthetic environments",
-      "Quantify communication fidelity under changing chemical conditions",
-    ],
+    image: "/research/scheme-1.png",
   },
   {
     id: "scheme-2",
     title: "Protocells to Prototissues",
     summary:
       "Create higher-order assemblies where protocells organize into functional clusters that exhibit coordinated responses and collective behavior.",
-    highlights: [
-      "Assemble multicompartment arrays with defined spatial architecture",
-      "Study emergent material properties from protocell coupling",
-      "Prototype route maps from single compartments to prototissue systems",
-    ],
+    image: "/research/scheme-2.png",
   },
 ];
 

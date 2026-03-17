@@ -70,42 +70,44 @@ export function TeamMembersGrid() {
           <div className="absolute inset-x-4 bottom-4 rounded-[1.5rem] border border-white/15 bg-black/50 px-5 py-4 backdrop-blur-md sm:inset-x-5 sm:bottom-5">
             <h3 className="text-3xl font-semibold text-white">{member.name}</h3>
             <p className="mt-1 text-xs font-medium uppercase tracking-[0.16em] text-white/75 sm:text-sm">{member.role}</p>
-            {linkedinUrl ? (
-              <a
-                href={linkedinUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${member.name} LinkedIn`}
-                className="mt-2 inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/40 text-white transition hover:bg-white/15"
-              >
-                <Linkedin className="h-4 w-4" />
-                <span className="sr-only">LinkedIn</span>
-              </a>
-            ) : null}
-            {researchgateUrl ? (
-              <a
-                href={researchgateUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${member.name} ResearchGate`}
-                className="mt-2 ml-1 inline-flex h-8 min-w-8 items-center justify-center rounded-full border border-white/40 px-1.5 text-[10px] font-semibold text-white transition hover:bg-white/15"
-              >
-                RG
-                <span className="sr-only">ResearchGate</span>
-              </a>
-            ) : null}
-            {orcidUrl ? (
-              <a
-                href={orcidUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${member.name} ORCID`}
-                className="mt-2 ml-1 inline-flex h-8 min-w-8 items-center justify-center rounded-full border border-white/40 px-1.5 text-[10px] font-semibold text-white transition hover:bg-white/15"
-              >
-                iD
-                <span className="sr-only">ORCID</span>
-              </a>
-            ) : null}
+            <div className="mt-2 flex items-center gap-1.5">
+              {linkedinUrl ? (
+                <a
+                  href={linkedinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${member.name} LinkedIn`}
+                  className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/40 text-white transition hover:bg-white/15"
+                >
+                  <Linkedin className="h-4 w-4" />
+                  <span className="sr-only">LinkedIn</span>
+                </a>
+              ) : null}
+              {researchgateUrl ? (
+                <a
+                  href={researchgateUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${member.name} ResearchGate`}
+                  className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/40 text-[10px] font-semibold text-white transition hover:bg-white/15"
+                >
+                  RG
+                  <span className="sr-only">ResearchGate</span>
+                </a>
+              ) : null}
+              {orcidUrl ? (
+                <a
+                  href={orcidUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${member.name} ORCID`}
+                  className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/40 text-[10px] font-semibold text-white transition hover:bg-white/15"
+                >
+                  iD
+                  <span className="sr-only">ORCID</span>
+                </a>
+              ) : null}
+            </div>
           </div>
         </article>
         );

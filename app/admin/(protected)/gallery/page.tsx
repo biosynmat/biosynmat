@@ -5,12 +5,30 @@ import { FormEvent, useCallback, useEffect, useState } from "react";
 import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query, serverTimestamp, updateDoc } from "firebase/firestore";
 import type { GalleryRecord } from "@/lib/admin-types";
 import { firebaseDb } from "@/lib/firebase/client";
+import { sortByDisplayDateDesc } from "@/lib/utils";
 import { UploadThingButton, extractUploadUrls } from "@/utils/uploadthing";
 
 const initialForm = {
   title: "",
   date: "",
 };
+
+function toDateInputValue(value: string): string {
+  const raw = value.trim();
+  if (!raw) {
+    return "";
+  }
+  if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) {
+    return raw;
+  }
+
+  const parsed = Date.parse(raw);
+  if (!Number.isNaN(parsed)) {
+    return new Date(parsed).toISOString().slice(0, 10);
+  }
+
+  return "";
+}
 
 export default function AdminGalleryPage() {
   const [items, setItems] = useState<GalleryRecord[]>([]);
@@ -44,7 +62,7 @@ export default function AdminGalleryPage() {
           images: normalizeImages(data),
         } satisfies GalleryRecord;
       });
-      setItems(records);
+      setItems(sortByDisplayDateDesc(records));
     } catch (loadError) {
       setError((loadError as Error).message);
     } finally {
@@ -102,7 +120,7 @@ export default function AdminGalleryPage() {
     setEditingId(item.id);
     setForm({
       title: item.title,
-      date: item.date,
+      date: toDateInputValue(item.date),
     });
     setUploadedImageUrls(item.images ?? (item.image ? [item.image] : []));
   };
@@ -133,7 +151,7 @@ export default function AdminGalleryPage() {
         />
         <input
           required
-          placeholder="Date (e.g. March 2026)"
+          type="date"
           value={form.date}
           onChange={(event) => setForm((prev) => ({ ...prev, date: event.target.value }))}
           className="rounded-lg border border-slate-300 px-3 py-2"

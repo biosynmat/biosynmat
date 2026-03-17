@@ -15,8 +15,7 @@ export default function NewsPage() {
           News
         </h1>
         <p className="mt-3 max-w-3xl text-slate-700">
-          Latest updates from BioSynMat. This section is separate from
-          Publications.
+          Latest updates from BioSynMat.
         </p>
       </div>
 

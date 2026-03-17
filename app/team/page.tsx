@@ -37,40 +37,42 @@ export default function TeamPage() {
             </h2>
             <p className="mt-1 text-slate-600">{piDetails.title}</p>
             <div className="mt-3 flex flex-wrap items-center gap-2.5">
-              <a
-                href={piLinkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${piDetails.name} LinkedIn`}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 bg-white text-slate-700 transition hover:bg-slate-100"
-              >
-                <Linkedin className="h-4 w-4" />
-                <span className="sr-only">LinkedIn</span>
-              </a>
-              {piResearchGate ? (
+              <div className="flex items-center gap-2">
                 <a
-                  href={piResearchGate}
+                  href={piLinkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`${piDetails.name} ResearchGate`}
-                  className="inline-flex h-9 min-w-9 items-center justify-center rounded-full border border-slate-300 bg-white px-2 text-[11px] font-semibold text-slate-700 transition hover:bg-slate-100"
+                  aria-label={`${piDetails.name} LinkedIn`}
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 bg-white text-slate-700 transition hover:bg-slate-100"
                 >
-                  RG
-                  <span className="sr-only">ResearchGate</span>
+                  <Linkedin className="h-4 w-4" />
+                  <span className="sr-only">LinkedIn</span>
                 </a>
-              ) : null}
-              {piOrcid ? (
-                <a
-                  href={piOrcid}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${piDetails.name} ORCID`}
-                  className="inline-flex h-9 min-w-9 items-center justify-center rounded-full border border-slate-300 bg-white px-2 text-[11px] font-semibold text-slate-700 transition hover:bg-slate-100"
-                >
-                  iD
-                  <span className="sr-only">ORCID</span>
-                </a>
-              ) : null}
+                {piResearchGate ? (
+                  <a
+                    href={piResearchGate}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${piDetails.name} ResearchGate`}
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 bg-white text-[11px] font-semibold text-slate-700 transition hover:bg-slate-100"
+                  >
+                    RG
+                    <span className="sr-only">ResearchGate</span>
+                  </a>
+                ) : null}
+                {piOrcid ? (
+                  <a
+                    href={piOrcid}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${piDetails.name} ORCID`}
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 bg-white text-[11px] font-semibold text-slate-700 transition hover:bg-slate-100"
+                  >
+                    iD
+                    <span className="sr-only">ORCID</span>
+                  </a>
+                ) : null}
+              </div>
               <Link
                 href="/meet-ananya-mishra"
                 className="teal-link inline-flex items-center rounded-full bg-teal-700 px-4 py-2 text-sm font-semibold transition hover:bg-teal-800"

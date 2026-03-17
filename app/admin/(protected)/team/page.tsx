@@ -29,7 +29,7 @@ export default function AdminTeamPage() {
     setIsLoading(true);
     setError("");
     try {
-      const q = query(collection(firebaseDb, "team_members"), orderBy("createdAt", "desc"));
+      const q = query(collection(firebaseDb, "team_members"), orderBy("createdAt", "asc"));
       const snapshot = await getDocs(q);
       const records = snapshot.docs.map((record) => {
         const data = record.data();

@@ -15,6 +15,23 @@ const initialForm = {
   contentHtml: "<p>Write the news content here...</p>",
 };
 
+function toDateInputValue(value: string): string {
+  const raw = value.trim();
+  if (!raw) {
+    return "";
+  }
+  if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) {
+    return raw;
+  }
+
+  const parsed = Date.parse(raw);
+  if (!Number.isNaN(parsed)) {
+    return new Date(parsed).toISOString().slice(0, 10);
+  }
+
+  return "";
+}
+
 export default function AdminNewsPage() {
   const [items, setItems] = useState<NewsRecord[]>([]);
   const [form, setForm] = useState(initialForm);
@@ -96,7 +113,7 @@ export default function AdminNewsPage() {
     setEditingId(item.id);
     setForm({
       title: item.title,
-      date: item.date,
+      date: toDateInputValue(item.date),
       summary: item.summary,
       contentHtml: item.contentHtml,
     });
@@ -130,7 +147,7 @@ export default function AdminNewsPage() {
           />
           <input
             required
-            placeholder="Display date (e.g. March 2026)"
+            type="date"
             value={form.date}
             onChange={(event) => setForm((prev) => ({ ...prev, date: event.target.value }))}
             className="rounded-lg border border-slate-300 px-3 py-2"
