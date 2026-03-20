@@ -3,6 +3,7 @@ import { Lora, Source_Sans_3, Geist } from "next/font/google";
 import "@uploadthing/react/styles.css";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { SitePreloader } from "@/components/public/site-preloader";
 import { QueryProvider } from "@/components/providers/query-provider";
 import "./globals.css";
 import { cn } from "@/lib/utils";
@@ -41,6 +42,7 @@ export default function RootLayout({
         className={`${headingFont.variable} ${bodyFont.variable} antialiased`}
       >
         <QueryProvider>
+          <SitePreloader />
           <div className="flex min-h-screen flex-col">
             <SiteHeader />
             <main className="flex-1 flex justify-center">

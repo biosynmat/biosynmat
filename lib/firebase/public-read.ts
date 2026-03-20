@@ -1,9 +1,24 @@
-import { collection, getDocs, limit, orderBy, query, type QueryConstraint } from "firebase/firestore";
-import type { GalleryRecord, NewsRecord, PublicationRecord, TeamMemberRecord } from "@/lib/admin-types";
+import {
+  collection,
+  getDocs,
+  limit,
+  orderBy,
+  query,
+  type QueryConstraint,
+} from "firebase/firestore";
+import type {
+  GalleryRecord,
+  NewsRecord,
+  PublicationRecord,
+  TeamMemberRecord,
+} from "@/lib/admin-types";
 import { firebaseDb } from "@/lib/firebase/client";
 import { sortByDisplayDateDesc } from "@/lib/utils";
 
-function mapTeamMember(id: string, data: Record<string, unknown>): TeamMemberRecord {
+function mapTeamMember(
+  id: string,
+  data: Record<string, unknown>,
+): TeamMemberRecord {
   return {
     id,
     name: String(data.name ?? ""),
@@ -15,7 +30,10 @@ function mapTeamMember(id: string, data: Record<string, unknown>): TeamMemberRec
   };
 }
 
-function mapPublication(id: string, data: Record<string, unknown>): PublicationRecord {
+function mapPublication(
+  id: string,
+  data: Record<string, unknown>,
+): PublicationRecord {
   return {
     id,
     title: String(data.title ?? ""),
@@ -45,7 +63,8 @@ function mapGallery(id: string, data: Record<string, unknown>): GalleryRecord {
     ? data.images.map((item) => String(item)).filter(Boolean)
     : [];
   const legacyImage = String(data.image ?? "");
-  const normalizedImages = images.length > 0 ? images : legacyImage ? [legacyImage] : [];
+  const normalizedImages =
+    images.length > 0 ? images : legacyImage ? [legacyImage] : [];
 
   return {
     id,
@@ -57,13 +76,28 @@ function mapGallery(id: string, data: Record<string, unknown>): GalleryRecord {
 }
 
 export async function readTeamMembers() {
-  const q = query(collection(firebaseDb, "team_members"), orderBy("createdAt", "asc"));
+  const q = query(
+    collection(firebaseDb, "team_members"),
+    orderBy("createdAt", "asc"),
+  );
   const snapshot = await getDocs(q);
   return snapshot.docs.map((doc) => mapTeamMember(doc.id, doc.data()));
 }
 
 export async function readPublications() {
-  const q = query(collection(firebaseDb, "publications"), orderBy("createdAt", "desc"));
+  const q = query(
+    collection(firebaseDb, "publications"),
+    orderBy("createdAt", "desc"),
+  );
+  const snapshot = await getDocs(q);
+  return snapshot.docs.map((doc) => mapPublication(doc.id, doc.data()));
+}
+
+export async function readGroupPublications() {
+  const q = query(
+    collection(firebaseDb, "group_publications"),
+    orderBy("createdAt", "desc"),
+  );
   const snapshot = await getDocs(q);
   return snapshot.docs.map((doc) => mapPublication(doc.id, doc.data()));
 }
@@ -80,7 +114,10 @@ export async function readNews(limitCount?: number) {
 }
 
 export async function readGallery() {
-  const q = query(collection(firebaseDb, "gallery_images"), orderBy("createdAt", "desc"));
+  const q = query(
+    collection(firebaseDb, "gallery_images"),
+    orderBy("createdAt", "desc"),
+  );
   const snapshot = await getDocs(q);
   const records = snapshot.docs.map((doc) => mapGallery(doc.id, doc.data()));
   return sortByDisplayDateDesc(records);

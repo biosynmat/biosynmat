@@ -30,6 +30,13 @@ export function SiteHeader() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [pendingHref, setPendingHref] = useState<string | null>(null);
+  const [prevPathname, setPrevPathname] = useState(pathname);
+
+  // Reset pending state once the route has actually changed
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
+    setPendingHref(null);
+  }
 
   const navIcons: Record<string, LucideIcon> = {
     "/": Home,
@@ -41,11 +48,6 @@ export function SiteHeader() {
     "/gallery": ImageIcon,
     "/opportunities": BriefcaseBusiness,
   };
-
-  // Reset pending state once the route has actually changed
-  useEffect(() => {
-    setPendingHref(null);
-  }, [pathname]);
 
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
@@ -143,7 +145,11 @@ export function SiteHeader() {
                         <motion.span
                           layoutId="nav-active-pill"
                           className="absolute inset-0 rounded-full bg-teal-700 shadow-sm"
-                          transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 380,
+                            damping: 30,
+                          }}
                         />
                       ) : null}
                       <span className="relative z-10 inline-flex items-center justify-center gap-1.5 text-inherit">
