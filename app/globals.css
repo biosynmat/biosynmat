@@ -96,6 +96,7 @@ body {
     radial-gradient(900px 400px at 90% -5%, #edf6f7 0%, transparent 55%),
     var(--background);
   font-family: var(--font-body), "Segoe UI", sans-serif;
+  cursor: url("/cursors/arrowhead-rounded-outline.svg") 2 2, auto;
 }
 
 h1,
@@ -109,11 +110,11 @@ h4 {
 a {
   color: inherit;
   text-decoration: none;
-  cursor: pointer !important;
+  cursor: url("/cursors/arrowhead-rounded-outline.svg") 2 2, pointer !important;
 }
 
 button {
-  cursor: pointer !important;
+  cursor: url("/cursors/arrowhead-rounded-outline.svg") 2 2, pointer !important;
 }
 
 

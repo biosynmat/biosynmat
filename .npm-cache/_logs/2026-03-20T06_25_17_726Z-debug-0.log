@@ -7,13 +7,13 @@
 6 silly config load:file:C:\Users\Imran Fareed\AppData\Roaming\npm\etc\npmrc
 7 verbose title npm run lint
 8 verbose argv "run" "lint"
-9 verbose logfile logs-max:10 dir:C:\website\biosynmat\.npm-cache\_logs\2026-03-17T05_29_44_663Z-
-10 verbose logfile C:\website\biosynmat\.npm-cache\_logs\2026-03-17T05_29_44_663Z-debug-0.log
+9 verbose logfile logs-max:10 dir:C:\website\biosynmat\.npm-cache\_logs\2026-03-20T06_25_17_726Z-
+10 verbose logfile C:\website\biosynmat\.npm-cache\_logs\2026-03-20T06_25_17_726Z-debug-0.log
 11 silly logfile start cleaning logs, removing 1 files
 12 silly logfile done cleaning log files
 13 verbose cwd C:\website\biosynmat
 14 verbose os Windows_NT 10.0.26200
 15 verbose node v25.8.1
 16 verbose npm  v11.11.0
-17 verbose exit 0
-18 info ok
+17 verbose exit 1
+18 verbose code 1
