@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Linkedin, Mail } from "lucide-react";
+import { PublicationsFeed } from "@/components/public/publications-feed";
 import { piDetails } from "@/lib/site-data";
 import { normalizeExternalUrl } from "@/lib/utils";
 
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
 
 export default function MeetPiPage() {
   const piLinkedin = normalizeExternalUrl(piDetails.linkedin);
+  const piResearchGate = normalizeExternalUrl(piDetails.researchgate);
 
   return (
     <div className="px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
@@ -31,7 +33,7 @@ export default function MeetPiPage() {
               className="w-full rounded-2xl border border-slate-200 bg-slate-50 object-cover"
             />
             <p className="mt-4 text-sm font-semibold text-slate-900">
-              {piDetails.title}
+              {piDetails.title.replace("Assistant Professor", "Research Assistant Professor")}
             </p>
             <p className="mt-1 text-sm text-slate-600">{piDetails.office}</p>
             <a
@@ -41,16 +43,27 @@ export default function MeetPiPage() {
               <Mail className="h-3.5 w-3.5" />
               {piDetails.email}
             </a>
-            <br />
-            <a
-              href={piLinkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-1 inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-100"
-            >
-              <Linkedin className="h-3.5 w-3.5" />
-              LinkedIn
-            </a>
+            <div className="mt-2 flex flex-wrap items-center gap-2">
+              <a
+                href={piLinkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-100"
+              >
+                <Linkedin className="h-3.5 w-3.5" />
+                LinkedIn
+              </a>
+              {piResearchGate ? (
+                <a
+                  href={piResearchGate}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center rounded-full border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-100"
+                >
+                  ResearchGate
+                </a>
+              ) : null}
+            </div>
           </div>
 
           <div>
@@ -92,6 +105,16 @@ export default function MeetPiPage() {
           </div>
         </div>
       </div>
+
+      <section id="publications" className="mt-10 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10">
+        <h2 className="text-3xl font-semibold text-slate-900">Publications</h2>
+        <p className="mt-2 text-slate-700">
+          Explore selected publications from the BioSynMat group and access publication links directly.
+        </p>
+        <div className="mt-6">
+          <PublicationsFeed />
+        </div>
+      </section>
     </div>
   );
 }

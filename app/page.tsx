@@ -68,7 +68,7 @@ export default function HomePage() {
               </h2>
             </div>
             <Link
-              href="/publications"
+              href="/meet-ananya-mishra#publications"
               className="text-sm font-semibold text-teal-800 underline-offset-4 hover:underline"
             >
               View All Publications

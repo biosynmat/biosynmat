@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import { PageHeader } from "@/components/ui/page-header";
-import { PublicationsFeed } from "@/components/public/publications-feed";
 
 export const metadata: Metadata = {
   title: "Publications",
@@ -8,12 +6,15 @@ export const metadata: Metadata = {
 
 export default function PublicationsPage() {
   return (
-    <div className="px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
-      <PageHeader
-        title="Publications"
-        description="Explore selected publications from the BioSynMat group and access publication links directly."
-      />
-      <PublicationsFeed />
+    <div className="section-shell py-24 sm:py-32">
+      <h1 className="text-center text-5xl font-bold tracking-tight text-teal-800 sm:text-7xl">
+        Stay tuned
+      </h1>
+      <div className="mt-8 flex items-center justify-center gap-3">
+        <div className="h-3 w-3 rounded-full bg-teal-700 animate-pulse [animation-duration:1.4s]" />
+        <div className="h-3 w-3 rounded-full bg-teal-700 animate-pulse [animation-delay:200ms] [animation-duration:1.4s]" />
+        <div className="h-3 w-3 rounded-full bg-teal-700 animate-pulse [animation-delay:400ms] [animation-duration:1.4s]" />
+      </div>
     </div>
   );
 }
