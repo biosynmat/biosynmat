@@ -4,6 +4,12 @@ import { PageHeader } from "@/components/ui/page-header";
 
 export const metadata: Metadata = {
   title: "Publications",
+  description:
+    "Selected publications from BioSynMat Lab spanning protocells, synthetic communication systems, and biomimetic materials.",
+  keywords: ["BioSynMat publications", "protocells research", "SRM research"],
+  alternates: {
+    canonical: "/publications",
+  },
 };
 
 export default function PublicationsPage() {

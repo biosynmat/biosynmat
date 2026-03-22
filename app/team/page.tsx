@@ -8,6 +8,17 @@ import { piDetails } from "@/lib/site-data";
 
 export const metadata: Metadata = {
   title: "Team",
+  description:
+    "Meet the BioSynMat team and principal investigator Dr. Ananya Mishra at SRM Institute of Science and Technology.",
+  keywords: [
+    "Ananya Mishra",
+    "Ananya Mishra SRM",
+    "BioSynMat team",
+    "research group SRM",
+  ],
+  alternates: {
+    canonical: "/team",
+  },
 };
 
 export default function TeamPage() {

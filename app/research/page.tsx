@@ -6,6 +6,18 @@ import { researchSchemes } from "@/lib/site-data";
 
 export const metadata: Metadata = {
   title: "Research",
+  description:
+    "Research at BioSynMat Lab on synthetic protocells, cell-to-cell communication, and colloidosome-inspired compartment systems.",
+  keywords: [
+    "protocells research",
+    "colloidosome research",
+    "SRM research",
+    "research group SRM",
+    "BioSynMat Lab",
+  ],
+  alternates: {
+    canonical: "/research",
+  },
 };
 
 export default function ResearchPage() {

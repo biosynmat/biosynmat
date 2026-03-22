@@ -7,6 +7,19 @@ import { normalizeExternalUrl } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Meet Ananya Mishra",
+  description:
+    "Profile of Dr. Ananya Mishra at BioSynMat Lab, SRM Institute of Science and Technology, with research highlights and publications.",
+  keywords: [
+    "Ananya Mishra",
+    "Ananya Mishra SRM",
+    "Ananya Mishra SRM professor",
+    "Ananya Mishra Google Scholar",
+    "BioSynMat",
+    "BioSynMat Lab",
+  ],
+  alternates: {
+    canonical: "/meet-ananya-mishra",
+  },
 };
 
 export default function MeetPiPage() {

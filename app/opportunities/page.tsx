@@ -10,6 +10,12 @@ import {
 
 export const metadata: Metadata = {
   title: "Opportunities",
+  description:
+    "Openings and contact details for internships and research opportunities at BioSynMat Lab, SRM Institute of Science and Technology.",
+  keywords: ["SRM research opportunities", "BioSynMat internships", "Ananya Mishra lab"],
+  alternates: {
+    canonical: "/opportunities",
+  },
 };
 
 export default function OpportunitiesPage() {

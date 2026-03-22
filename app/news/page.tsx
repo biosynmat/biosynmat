@@ -5,6 +5,12 @@ import { NewsFeed } from "@/components/public/news-feed";
 
 export const metadata: Metadata = {
   title: "News",
+  description:
+    "Latest updates, announcements, and research news from BioSynMat Lab at SRM.",
+  keywords: ["BioSynMat news", "SRM research updates", "Ananya Mishra lab news"],
+  alternates: {
+    canonical: "/news",
+  },
 };
 
 export default function NewsPage() {

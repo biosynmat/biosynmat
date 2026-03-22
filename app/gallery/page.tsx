@@ -4,6 +4,12 @@ import { GalleryFeedLoader } from "@/components/public/gallery-feed-loader";
 
 export const metadata: Metadata = {
   title: "Gallery",
+  description:
+    "Photo gallery of BioSynMat Lab activities, events, and research snapshots at SRM.",
+  keywords: ["BioSynMat gallery", "SRM lab photos", "research lab activities"],
+  alternates: {
+    canonical: "/gallery",
+  },
 };
 
 export default function GalleryPage() {

@@ -1,6 +1,16 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import { AdminLoginForm } from "@/components/admin/admin-login-form";
 import { LoadingIndicator } from "@/components/ui/loading-indicator";
+
+export const metadata: Metadata = {
+  title: "Login",
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+  },
+};
 
 export default function AdminLoginPage() {
   return (

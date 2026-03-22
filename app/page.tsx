@@ -1,6 +1,23 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { HomePublicationsPreview } from "@/components/public/home-publications-preview";
 import { NewsFeed } from "@/components/public/news-feed";
+
+export const metadata: Metadata = {
+  title: "Home",
+  description:
+    "BioSynMat Lab at SRM explores synthetic biomaterials, protocells, and colloidosome-inspired systems for next-generation bioinspired research.",
+  keywords: [
+    "BioSynMat",
+    "BioSynMat Lab",
+    "SRM research",
+    "protocells research",
+    "colloidosome research",
+  ],
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default function HomePage() {
   return (
