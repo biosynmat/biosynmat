@@ -29,6 +29,10 @@ export const metadata: Metadata = {
   },
   description:
     "BioSynMat explores synthetic protocell systems to mimic natural cellular behavior.",
+  icons: {
+    icon: [{ url: "/logo.svg", type: "image/svg+xml" }],
+    shortcut: [{ url: "/logo.svg", type: "image/svg+xml" }],
+  },
 };
 
 export default function RootLayout({

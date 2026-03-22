@@ -102,7 +102,7 @@ export function SiteHeader() {
             className="inline-flex shrink-0 items-center gap-3 text-lg font-semibold tracking-[0.18em] text-slate-900"
           >
             <Image
-              src="/logo.png"
+              src="/logo.svg"
               alt="BioSynMat logo"
               width={54}
               height={54}

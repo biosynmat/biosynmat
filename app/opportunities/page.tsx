@@ -30,8 +30,7 @@ export default function OpportunitiesPage() {
             <p>
               Interested in becoming part of our research team? We invite
               motivated candidates to join us. Details are listed on our
-              Opportunities page, which is updated frequently with new
-              openings.
+              Opportunities page, which is updated frequently with new openings.
             </p>
             <p className="rounded-xl border border-amber-200 bg-amber-50 p-3 text-amber-900">
               <span className="mb-1 inline-flex items-center gap-1.5 font-semibold">

@@ -21,7 +21,7 @@ export function SiteFooter() {
           <section className="space-y-4">
             <Link href="/" className="inline-flex items-center gap-3">
               <Image
-                src="/logo.png"
+                src="/logo.svg"
                 alt="BioSynMat logo"
                 width={64}
                 height={64}
