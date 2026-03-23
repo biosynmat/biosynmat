@@ -110,11 +110,19 @@ h4 {
 a {
   color: inherit;
   text-decoration: none;
-  cursor: url("/cursors/arrowhead-rounded-outline.svg") 2 2, pointer !important;
+  cursor: pointer !important;
 }
 
-button {
-  cursor: url("/cursors/arrowhead-rounded-outline.svg") 2 2, pointer !important;
+:is(
+  button,
+  a[data-slot="button"],
+  [data-slot="button"],
+  [role="button"],
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"]
+){
+  cursor: pointer !important;
 }
 
 
