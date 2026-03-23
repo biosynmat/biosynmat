@@ -122,7 +122,7 @@ export default function MeetPiPage() {
       <section id="publications" className="mt-10 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10">
         <h2 className="text-3xl font-semibold text-slate-900">Publications</h2>
         <p className="mt-2 text-slate-700">
-          Explore selected publications from the BioSynMat group and access publication links directly.
+          Explore selected publications by Dr. Ananya Mishra and access publication links directly.
         </p>
         <div className="mt-6">
           <PublicationsFeed />

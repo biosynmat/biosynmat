@@ -18,7 +18,7 @@ export function GroupPublicationsFeed() {
   }
 
   if (items.length === 0) {
-    return <EmptyState message="No group publications added yet." />;
+    return <EmptyState message="No publications added yet." />;
   }
 
   return <PublicationGrid items={items} />;

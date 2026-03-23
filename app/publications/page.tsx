@@ -17,7 +17,7 @@ export default function PublicationsPage() {
     <div className="px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
       <PageHeader
         title="Publications"
-        description="Explore selected publications from the BioSynMat group and access publication links directly."
+      description="Explore selected publications from the BioSynMat group and access publication links directly."
       />
       <GroupPublicationsFeed />
     </div>
