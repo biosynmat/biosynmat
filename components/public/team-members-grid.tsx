@@ -18,6 +18,8 @@ function fallbackMembers(): TeamMemberRecord[] {
     linkedin: member.linkedin ?? "",
     researchgate: member.researchgate ?? "",
     orcid: member.orcid ?? "",
+    webofscience: member.webofscience ?? "",
+    scopus: member.scopus ?? "",
   }));
 }
 
@@ -61,6 +63,8 @@ export function TeamMembersGrid() {
               linkedin={member.linkedin}
               researchgate={member.researchgate}
               orcid={member.orcid}
+              webofscience={member.webofscience}
+              scopus={member.scopus}
               variant="light"
               className="mt-2"
             />

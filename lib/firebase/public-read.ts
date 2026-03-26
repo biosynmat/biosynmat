@@ -27,6 +27,8 @@ function mapTeamMember(
     linkedin: data.linkedin ? String(data.linkedin) : "",
     researchgate: data.researchgate ? String(data.researchgate) : "",
     orcid: data.orcid ? String(data.orcid) : "",
+    webofscience: data.webofscience ? String(data.webofscience) : "",
+    scopus: data.scopus ? String(data.scopus) : "",
   };
 }
 

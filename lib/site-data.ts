@@ -10,6 +10,8 @@ export type TeamMember = {
   linkedin?: string;
   researchgate?: string;
   orcid?: string;
+  webofscience?: string;
+  scopus?: string;
 };
 
 export type ResearchScheme = {
@@ -38,7 +40,9 @@ export const piDetails = {
   image: "/team/ananya.jpeg",
   linkedin: "https://www.linkedin.com/",
   researchgate: "https://www.researchgate.net/profile/Ananya-Mishra-48",
-  orcid: "https://orcid.org/",
+  orcid: "https://orcid.org/0000-0002-6852-1318",
+  webofscience: "https://www.webofscience.com/wos/author/record/GZA-8930-2022",
+  scopus: "https://www.scopus.com/authid/detail.uri?authorId=57214672246",
   bio: [
     "Dr Ananya Mishra is an Assistant Professor (Research) at the Department of Chemistry, SRMIST, Kattankulathur, Chennai since May 2025.",
     "She earned her BSc (Hons.) in Chemistry from Hindu College, University of Delhi. She subsequently joined Jawaharlal Nehru Centre for Advanced Scientific Research (JNCASR), Bangalore, as an Integrated PhD student, where she completed both her masters and doctoral studies under the supervision of Prof. Subi J. George. Her doctoral research focused on supramolecular chemistry with an emphasis on bioinspired self-assembly.",

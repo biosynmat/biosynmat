@@ -6,6 +6,8 @@ export type TeamMemberRecord = {
   linkedin?: string;
   researchgate?: string;
   orcid?: string;
+  webofscience?: string;
+  scopus?: string;
   createdAt?: string | null;
 };
 

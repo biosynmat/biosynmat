@@ -7,6 +7,8 @@ type SocialLinksProps = {
   linkedin?: string;
   researchgate?: string;
   orcid?: string;
+  webofscience?: string;
+  scopus?: string;
   /** "light" renders white-on-dark style (for overlays), "default" renders slate borders */
   variant?: "default" | "light";
   className?: string;
@@ -22,14 +24,23 @@ export function SocialLinks({
   linkedin,
   researchgate,
   orcid,
+  webofscience,
+  scopus,
   variant = "default",
   className,
 }: SocialLinksProps) {
   const linkedinUrl = normalizeExternalUrl(linkedin);
   const researchgateUrl = normalizeExternalUrl(researchgate);
   const orcidUrl = normalizeExternalUrl(orcid);
+  const webOfScienceUrl = normalizeExternalUrl(webofscience);
+  const scopusUrl = normalizeExternalUrl(scopus);
 
-  const hasAny = linkedinUrl || researchgateUrl || orcidUrl;
+  const hasAny =
+    linkedinUrl ||
+    researchgateUrl ||
+    orcidUrl ||
+    webOfScienceUrl ||
+    scopusUrl;
   if (!hasAny) return null;
 
   const base = variant === "light" ? baseLight : baseDefault;
@@ -76,6 +87,36 @@ export function SocialLinks({
         >
           iD
           <span className="sr-only">ORCID</span>
+        </a>
+      ) : null}
+      {webOfScienceUrl ? (
+        <a
+          href={webOfScienceUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${name} Web of Science`}
+          className={cn(
+            base,
+            variant === "light" ? "px-2 text-[10px] font-semibold" : "px-2 text-[11px] font-semibold",
+          )}
+        >
+          WoS
+          <span className="sr-only">Web of Science</span>
+        </a>
+      ) : null}
+      {scopusUrl ? (
+        <a
+          href={scopusUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${name} Scopus`}
+          className={cn(
+            base,
+            variant === "light" ? "px-2 text-[10px] font-semibold" : "px-2 text-[11px] font-semibold",
+          )}
+        >
+          SC
+          <span className="sr-only">Scopus</span>
         </a>
       ) : null}
     </div>

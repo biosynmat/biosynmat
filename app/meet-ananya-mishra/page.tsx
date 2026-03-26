@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Linkedin, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
 import { PublicationsFeed } from "@/components/public/publications-feed";
 import { piDetails } from "@/lib/site-data";
 import { normalizeExternalUrl } from "@/lib/utils";
@@ -25,6 +25,9 @@ export const metadata: Metadata = {
 export default function MeetPiPage() {
   const piLinkedin = normalizeExternalUrl(piDetails.linkedin);
   const piResearchGate = normalizeExternalUrl(piDetails.researchgate);
+  const piOrcid = normalizeExternalUrl(piDetails.orcid);
+  const piWebOfScience = normalizeExternalUrl(piDetails.webofscience);
+  const piScopus = normalizeExternalUrl(piDetails.scopus);
 
   return (
     <div className="px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
@@ -63,7 +66,6 @@ export default function MeetPiPage() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-100"
               >
-                <Linkedin className="h-3.5 w-3.5" />
                 LinkedIn
               </a>
               {piResearchGate ? (
@@ -74,6 +76,36 @@ export default function MeetPiPage() {
                   className="inline-flex items-center rounded-full border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-100"
                 >
                   ResearchGate
+                </a>
+              ) : null}
+              {piOrcid ? (
+                <a
+                  href={piOrcid}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center rounded-full border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-100"
+                >
+                  ORCID
+                </a>
+              ) : null}
+              {piWebOfScience ? (
+                <a
+                  href={piWebOfScience}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center rounded-full border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-100"
+                >
+                  Web of Science
+                </a>
+              ) : null}
+              {piScopus ? (
+                <a
+                  href={piScopus}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center rounded-full border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-100"
+                >
+                  Scopus
                 </a>
               ) : null}
             </div>

@@ -49,6 +49,8 @@ export default function TeamPage() {
                 linkedin={piDetails.linkedin}
                 researchgate={piDetails.researchgate}
                 orcid={piDetails.orcid}
+                webofscience={piDetails.webofscience}
+                scopus={piDetails.scopus}
               />
               <Link
                 href="/meet-ananya-mishra"
