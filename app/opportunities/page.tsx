@@ -92,10 +92,10 @@ export default function OpportunitiesPage() {
                 Email
               </p>
               <a
-                href="mailto:biosynmat@gmail.com"
+                href="mailto:ananyam@srmist.edu.in"
                 className="text-sm text-slate-800 underline decoration-slate-300 underline-offset-4"
               >
-                biosynmat@gmail.com
+                ananyam@srmist.edu.in
               </a>
             </div>
             <p className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.1em] text-slate-500">

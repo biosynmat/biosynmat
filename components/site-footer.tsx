@@ -4,7 +4,7 @@ import { Building2, ExternalLink, Linkedin, Mail, MapPin } from "lucide-react";
 import { navLinks } from "@/lib/site-data";
 
 const contact = {
-  email: "biosynmat@gmail.com",
+  email: "ananyam@srmist.edu.in",
   mapsUrl: "https://maps.app.goo.gl/W1w41B2wLas4V69D7",
   institutionUrl: "https://www.srmist.edu.in/",
   address:
