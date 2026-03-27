@@ -26,7 +26,7 @@ export function TiptapEditor({ value, onChange }: TiptapEditorProps) {
 
     const incoming = value || "";
     if (editor.getHTML() !== incoming) {
-      editor.commands.setContent(incoming, false);
+      editor.commands.setContent(incoming, { emitUpdate: false });
     }
   }, [editor, value]);
 
