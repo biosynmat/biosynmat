@@ -1,7 +1,6 @@
 import {
   collection,
   getDocs,
-  limit,
   orderBy,
   query,
   type QueryConstraint,
@@ -50,13 +49,21 @@ function mapPublication(
 }
 
 function mapNews(id: string, data: Record<string, unknown>): NewsRecord {
+  const images = Array.isArray(data.images)
+    ? data.images.map((item) => String(item)).filter(Boolean)
+    : [];
+  const legacyImage = String(data.image ?? "");
+  const normalizedImages =
+    images.length > 0 ? images : legacyImage ? [legacyImage] : [];
+
   return {
     id,
     title: String(data.title ?? ""),
     date: String(data.date ?? ""),
     summary: String(data.summary ?? ""),
     contentHtml: String(data.contentHtml ?? ""),
-    image: data.image ? String(data.image) : "",
+    images: normalizedImages,
+    image: normalizedImages[0] ?? "",
   };
 }
 
@@ -106,13 +113,14 @@ export async function readGroupPublications() {
 
 export async function readNews(limitCount?: number) {
   const constraints: QueryConstraint[] = [orderBy("createdAt", "desc")];
-  if (limitCount && limitCount > 0) {
-    constraints.push(limit(limitCount));
-  }
-
   const q = query(collection(firebaseDb, "news"), ...constraints);
   const snapshot = await getDocs(q);
-  return snapshot.docs.map((doc) => mapNews(doc.id, doc.data()));
+  const records = snapshot.docs.map((doc) => mapNews(doc.id, doc.data()));
+  const sorted = sortByDisplayDateDesc(records);
+  if (limitCount && limitCount > 0) {
+    return sorted.slice(0, limitCount);
+  }
+  return sorted;
 }
 
 export async function readGallery() {

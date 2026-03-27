@@ -34,7 +34,7 @@ export function HomePublicationsPreview({ limitCount = 3 }: HomePublicationsPrev
   }
 
   if (visibleItems.length === 0) {
-    return <EmptyState message="No publications added yet." />;
+    return <EmptyState message="Stay tuned..." />;
   }
 
   return (

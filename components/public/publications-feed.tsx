@@ -18,7 +18,7 @@ export function PublicationsFeed() {
   }
 
   if (items.length === 0) {
-    return <EmptyState message="No publications added yet." />;
+    return <EmptyState message="Stay tuned..." />;
   }
 
   return <PublicationGrid items={items} />;

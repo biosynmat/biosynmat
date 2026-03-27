@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import {
   AlertTriangle,
+  BriefcaseBusiness,
   ExternalLink,
+  FlaskConical,
   GraduationCap,
   Mail,
   MapPin,
@@ -57,16 +59,26 @@ export default function OpportunitiesPage() {
                 PhD positions
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-slate-700">
-                We currently have no open PhD positions.
-              </p>
-              <p className="mt-2 text-sm text-slate-800">
-                For further information, please contact us via email regarding
-                PhD opportunities in the BioSynMat Lab.
+                Please contact us via email to find out about current and
+                upcoming PhD openings in the BioSynMat Lab.
               </p>
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold text-slate-900">
+              <h3 className="inline-flex items-center gap-1.5 text-lg font-semibold text-slate-900">
+                <FlaskConical className="h-5 w-5 text-teal-700" />
+                Postdoctoral positions
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-slate-700">
+                Candidates interested in postdoctoral opportunities are
+                encouraged to contact us via email with their CV, research
+                interests, and a brief statement of motivation.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="inline-flex items-center gap-1.5 text-lg font-semibold text-slate-900">
+                <BriefcaseBusiness className="h-5 w-5 text-teal-700" />
                 Internship
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-slate-700">

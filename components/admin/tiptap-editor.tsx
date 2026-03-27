@@ -2,6 +2,7 @@
 
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import { useEffect } from "react";
 
 type TiptapEditorProps = {
   value: string;
@@ -17,6 +18,17 @@ export function TiptapEditor({ value, onChange }: TiptapEditorProps) {
       onChange(currentEditor.getHTML());
     },
   });
+
+  useEffect(() => {
+    if (!editor) {
+      return;
+    }
+
+    const incoming = value || "";
+    if (editor.getHTML() !== incoming) {
+      editor.commands.setContent(incoming, false);
+    }
+  }, [editor, value]);
 
   if (!editor) {
     return null;

@@ -60,13 +60,17 @@ export default function HomePage() {
             </h2>
             <ul className="space-y-3 text-sm leading-relaxed text-slate-700">
               <li className="rounded-xl bg-white p-3">
-                Synthetic cell-to-cell communication in protocell populations
+                Construction of programmable protocells
+              </li>
+              <li className="rounded-xl bg-white p-3">
+                Synthetic cell-to-cell communications in protocell populations
               </li>
               <li className="rounded-xl bg-white p-3">
                 Hierarchical organization from protocells to prototissues
               </li>
               <li className="rounded-xl bg-white p-3">
-                Programmable nanoparticle-enabled compartment behavior
+                Convergence of supramolecular self-assembly and protocell
+                biochemistry
               </li>
             </ul>
           </div>
@@ -81,7 +85,7 @@ export default function HomePage() {
                 Publications
               </p>
               <h2 className="text-3xl font-semibold text-slate-900">
-                Featured Publications
+                Dr Mishra&apos;s Publications
               </h2>
             </div>
             <Link
@@ -103,8 +107,7 @@ export default function HomePage() {
           </h2>
           <p className="max-w-3xl text-slate-700">
             We welcome motivated students and scholars who want to work on
-            protocells, synthetic communication systems, and biomimetic
-            materials.
+            protocells, bioinspired materials and supramolecular self assembly.
           </p>
           <Link
             href="/opportunities"

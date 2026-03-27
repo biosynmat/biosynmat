@@ -5,6 +5,7 @@ const PUBLIC_ROUTES = [
   "",
   "/research",
   "/publications",
+  "/funding",
   "/news",
   "/team",
   "/gallery",

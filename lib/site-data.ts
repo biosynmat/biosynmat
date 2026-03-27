@@ -27,6 +27,7 @@ export const navLinks: NavLink[] = [
   { href: "/team", label: "Team" },
   { href: "/research", label: "Research" },
   { href: "/publications", label: "Publications" },
+  { href: "/funding", label: "Funding" },
   { href: "/news", label: "News" },
   { href: "/gallery", label: "Gallery" },
   { href: "/opportunities", label: "Opportunities" },
@@ -45,7 +46,7 @@ export const piDetails = {
   scopus: "https://www.scopus.com/authid/detail.uri?authorId=57214672246",
   bio: [
     "Dr Ananya Mishra is an Assistant Professor (Research) at the Department of Chemistry, SRMIST, Kattankulathur, Chennai since May 2025.",
-    "She earned her BSc (Hons.) in Chemistry from Hindu College, University of Delhi. She subsequently joined Jawaharlal Nehru Centre for Advanced Scientific Research (JNCASR), Bangalore, as an Integrated PhD student, where she completed both her masters and doctoral studies under the supervision of Prof. Subi J. George. Her doctoral research focused on supramolecular chemistry with an emphasis on bioinspired self-assembly.",
+    "She completed her BSc (Hons.) in Chemistry from Hindu College, University of Delhi. She subsequently joined Jawaharlal Nehru Centre for Advanced Scientific Research (JNCASR), Bangalore, as an Integrated PhD student, where she completed both her masters and doctoral studies under the supervision of Prof. Subi J. George. Her doctoral research focused on supramolecular chemistry with an emphasis on bioinspired self-assembly.",
     "Following her PhD, she pursued postdoctoral research in the group of Stephen Mann, FRS, where she was awarded the prestigious Marie Sklodowska-Curie Fellowship. Her postdoctoral work centered on the development of programmable protocells and prototissues, advancing the understanding of artificial cellular systems.",
   ],
   achievements: [
@@ -56,7 +57,7 @@ export const piDetails = {
     "Invited speaker at Gordon Research Conference and Seminar 2023, Self-assembly and Supramolecular Chemistry, held from May 13-19, 2023, in Les Diablerets, Switzerland.",
     "Invited speaker at SynCell 2022, held from 18-20 May 2022 in the Hague, The Netherlands.",
     "Granted Marie Sklodowska Curie (MSC)-Individual Fellowship for the project titled Programmed Protocells.",
-    "GYTI, 2019 for the research work on Actin Mimetic ATP Driven Controlled Supramolecular Polymerization. This award was conferred to a total of 45 winners from all over the country in a variety of fields addressing the current challenges faced by the society. The award was presented by the Hon'ble Vice President of India.",
+    "Gandhian Young Technological Innovation Award (GYTI), 2019 for the research work on Actin Mimetic ATP Driven Controlled Supramolecular Polymerization. This award was conferred to a total of 45 winners from all over the country in a variety of fields addressing the current challenges faced by the society. The award was presented by the Hon'ble Vice President of India.",
     "Best Poster Award entitled The Rising Star Award in the 2016 International Workshop on Supramolecular Chemistry and Functional Materials 2016 CEMSupra, Tsumagoi, Gunma, Japan.",
     "Best Poster award by Royal Society of Chemistry in Eighteenth Chemical Research Society of India, National Symposium in Chemistry, 2016 held in Chandigarh, Punjab, India.",
     "Best Poster Award in Winter School 2015 on Frontiers of Materials Science, JNCASR, Bangalore, India.",

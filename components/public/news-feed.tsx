@@ -36,31 +36,41 @@ export function NewsFeed({ limitCount }: NewsFeedProps) {
 
   return (
     <div className="grid gap-4 lg:grid-cols-3">
-      {items.map((item) => (
-        <article
-          key={item.id}
-          className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
-        >
-          {item.image ? (
-            <Image
-              src={item.image}
-              alt={item.title}
-              width={720}
-              height={360}
-              className="mb-3 h-40 w-full rounded-xl border border-slate-200 object-cover"
-            />
-          ) : null}
-          <p className="mb-2 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.1em] text-slate-500">
-            <CalendarDays className="h-3.5 w-3.5" />
-            {item.date}
-          </p>
-          <h2 className="mb-2 text-xl font-semibold text-slate-900">
-            {item.title}
-          </h2>
-          <p className="text-sm leading-relaxed text-slate-700">
-            {item.summary}
-          </p>
-          {item.contentHtml ? (
+      {items.map((item) => {
+        const newsImages =
+          item.images.length > 0 ? item.images : item.image ? [item.image] : [];
+        const coverImage = newsImages[0] ?? "";
+
+        return (
+          <article key={item.id} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            {coverImage ? (
+              <Image
+                src={coverImage}
+                alt={item.title}
+                width={720}
+                height={360}
+                className="mb-3 aspect-[16/9] w-full rounded-xl border border-slate-200 bg-slate-50 object-contain"
+              />
+            ) : null}
+            {item.date ? (
+              <p className="mb-2 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.1em] text-slate-500">
+                <CalendarDays className="h-3.5 w-3.5" />
+                {item.date}
+              </p>
+            ) : null}
+            <h2 className="mb-2 text-xl font-semibold text-slate-900">
+              {item.title}
+            </h2>
+            {item.summary ? (
+              <p className="text-sm leading-relaxed text-slate-700">
+                {item.summary}
+              </p>
+            ) : null}
+            {item.images.length > 1 ? (
+              <p className="mt-2 text-xs font-semibold uppercase tracking-[0.08em] text-slate-500">
+                +{item.images.length - 1} more photos
+              </p>
+            ) : null}
             <Dialog>
               <DialogTrigger asChild>
                 <button
@@ -71,32 +81,49 @@ export function NewsFeed({ limitCount }: NewsFeedProps) {
                 </button>
               </DialogTrigger>
               <DialogContent className="max-h-[90vh] overflow-y-auto p-4 sm:max-w-3xl sm:p-6">
-                {item.image ? (
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    width={1200}
-                    height={675}
-                    className="mb-4 h-44 w-full rounded-xl border border-slate-200 object-cover sm:h-64"
-                  />
+                {newsImages.length > 0 ? (
+                  <div
+                    className={`mb-4 grid gap-2 ${
+                      newsImages.length === 1 ? "grid-cols-1 place-items-center" : "sm:grid-cols-2"
+                    }`}
+                  >
+                    {newsImages.map((url, index) => (
+                      <Image
+                        key={`${url}-${index}`}
+                        src={url}
+                        alt={`${item.title} image ${index + 1}`}
+                        width={1200}
+                        height={675}
+                        className={`aspect-[16/9] rounded-xl border border-slate-200 bg-slate-50 object-contain ${
+                          newsImages.length === 1 ? "w-full max-w-2xl" : "w-full"
+                        }`}
+                      />
+                    ))}
+                  </div>
                 ) : null}
                 <DialogHeader className="pr-8">
-                  <p className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.1em] text-slate-500">
-                    <CalendarDays className="h-3.5 w-3.5" />
-                    {item.date}
-                  </p>
+                  {item.date ? (
+                    <p className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.1em] text-slate-500">
+                      <CalendarDays className="h-3.5 w-3.5" />
+                      {item.date}
+                    </p>
+                  ) : null}
                   <DialogTitle>{item.title}</DialogTitle>
-                  <DialogDescription>{item.summary}</DialogDescription>
+                  {item.summary ? (
+                    <DialogDescription>{item.summary}</DialogDescription>
+                  ) : null}
                 </DialogHeader>
-                <div
-                  className="prose prose-slate mt-4 max-w-none text-sm"
-                  dangerouslySetInnerHTML={{ __html: item.contentHtml }}
-                />
+                {item.contentHtml ? (
+                  <div
+                    className="prose prose-slate mt-4 max-w-none text-sm"
+                    dangerouslySetInnerHTML={{ __html: item.contentHtml }}
+                  />
+                ) : null}
               </DialogContent>
             </Dialog>
-          ) : null}
-        </article>
-      ))}
+          </article>
+        );
+      })}
     </div>
   );
 }

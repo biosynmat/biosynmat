@@ -22,7 +22,7 @@ export const uploadRouter = {
   newsImage: f({
     image: {
       maxFileSize: "8MB",
-      maxFileCount: 1,
+      maxFileCount: 12,
     },
   }).onUploadComplete(async ({ file }) => ({
     url: file.ufsUrl,

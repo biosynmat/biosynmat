@@ -30,6 +30,7 @@ export type NewsRecord = {
   date: string;
   summary: string;
   contentHtml: string;
+  images: string[];
   image?: string;
   createdAt?: string | null;
 };

@@ -149,6 +149,22 @@ a {
   fill: none !important;
 }
 
+@keyframes stay-tuned-float {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.88;
+  }
+  50% {
+    transform: translateY(-3px);
+    opacity: 1;
+  }
+}
+
+.empty-stay-tuned {
+  animation: stay-tuned-float 2.4s ease-in-out infinite;
+}
+
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
