@@ -108,9 +108,6 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  verification: {
-    google: "Z19_STxEAm59UOGMc3z_GNRLjLk4IFXHH2PcZbIbYp4",
-  },
   icons: {
     icon: [{ url: "/logo.svg", type: "image/svg+xml" }],
     shortcut: [{ url: "/logo.svg", type: "image/svg+xml" }],
