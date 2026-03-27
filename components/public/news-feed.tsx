@@ -80,7 +80,7 @@ export function NewsFeed({ limitCount }: NewsFeedProps) {
                   Know More
                 </button>
               </DialogTrigger>
-              <DialogContent className="max-h-[90vh] overflow-y-auto p-4 sm:max-w-3xl sm:p-6">
+              <DialogContent className="max-h-[90vh] overflow-y-auto p-4 sm:max-w-5xl sm:p-6">
                 {newsImages.length > 0 ? (
                   <div
                     className={`mb-4 grid gap-2 ${
@@ -88,16 +88,18 @@ export function NewsFeed({ limitCount }: NewsFeedProps) {
                     }`}
                   >
                     {newsImages.map((url, index) => (
-                      <Image
+                      <div
                         key={`${url}-${index}`}
-                        src={url}
-                        alt={`${item.title} image ${index + 1}`}
-                        width={1200}
-                        height={675}
-                        className={`aspect-[16/9] rounded-xl border border-slate-200 bg-slate-50 object-contain ${
-                          newsImages.length === 1 ? "w-full max-w-2xl" : "w-full"
-                        }`}
-                      />
+                        className={`${newsImages.length === 1 ? "w-full max-w-2xl" : "w-full"}`}
+                      >
+                        <Image
+                          src={url}
+                          alt={`${item.title} image ${index + 1}`}
+                          width={1200}
+                          height={675}
+                          className="aspect-[16/9] w-full rounded-xl border border-slate-200 bg-slate-50 object-contain"
+                        />
+                      </div>
                     ))}
                   </div>
                 ) : null}
