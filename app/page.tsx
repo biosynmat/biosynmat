@@ -29,7 +29,7 @@ export default function HomePage() {
               About us
             </p>
             <h1 className="mb-5 text-3xl font-semibold leading-tight text-slate-900 sm:text-5xl">
-              BioSynMat Lab
+              Dr. Ananya Mishra&apos;s BioSynMat Lab
             </h1>
             <p className="max-w-2xl text-lg leading-relaxed text-slate-700">
               Our Research is dedicated to creating bioinspired synthetic
