@@ -64,7 +64,7 @@ const structuredData = {
 export const metadata: Metadata = {
   metadataBase: siteUrl,
   title: {
-    default: "BioSynMat Research Group",
+    default: "Dr.Ananya Mishra's BioSynMat Lab",
     template: "%s | BioSynMat",
   },
   description:
@@ -86,14 +86,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: siteUrl,
-    siteName: "BioSynMat",
-    title: "BioSynMat Research Group",
+    siteName: "Dr.Ananya Mishra's BioSynMat Lab",
+    title: "Dr.Ananya Mishra's BioSynMat Lab",
     description:
       "BioSynMat explores synthetic protocell systems to mimic natural cellular behavior.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "BioSynMat Research Group",
+    title: "Dr.Ananya Mishra's BioSynMat Lab",
     description:
       "BioSynMat explores synthetic protocell systems to mimic natural cellular behavior.",
   },

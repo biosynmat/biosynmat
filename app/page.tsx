@@ -4,7 +4,7 @@ import { HomePublicationsPreview } from "@/components/public/home-publications-p
 import { NewsFeed } from "@/components/public/news-feed";
 
 export const metadata: Metadata = {
-  title: "BioSynMat",
+  title: "Dr.Ananya Mishra's BioSynMat Lab",
   description:
     "BioSynMat Lab at SRM explores synthetic biomaterials, protocells, and colloidosome-inspired systems for next-generation bioinspired research.",
   keywords: [
