@@ -3,13 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import type { LucideIcon } from "lucide-react";
 import {
   BriefcaseBusiness,
-  Ellipsis,
-  Landmark,
   FlaskConical,
   Home,
   ImageIcon,
@@ -31,16 +29,13 @@ import {
 export function SiteHeader() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isMoreMenuOpen, setIsMoreMenuOpen] = useState(false);
   const [pendingHref, setPendingHref] = useState<string | null>(null);
   const [prevPathname, setPrevPathname] = useState(pathname);
-  const moreMenuRef = useRef<HTMLLIElement | null>(null);
 
   // Reset pending state once the route has actually changed
   if (prevPathname !== pathname) {
     setPrevPathname(pathname);
     setPendingHref(null);
-    setIsMoreMenuOpen(false);
   }
 
   const navIcons: Record<string, LucideIcon> = {
@@ -49,14 +44,12 @@ export function SiteHeader() {
     "/team": Users,
     "/research": FlaskConical,
     "/publications": BookOpen,
-    "/funding": Landmark,
     "/news": Newspaper,
     "/gallery": ImageIcon,
     "/opportunities": BriefcaseBusiness,
   };
-  const moreNavHrefs = new Set(["/gallery", "/opportunities"]);
-  const primaryNavLinks = navLinks.filter((item) => !moreNavHrefs.has(item.href));
-  const moreNavLinks = navLinks.filter((item) => moreNavHrefs.has(item.href));
+  const headerNavLinks = navLinks.filter((item) => item.href !== "/news");
+  const primaryNavLinks = headerNavLinks;
 
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
@@ -72,10 +65,6 @@ export function SiteHeader() {
     if (pendingHref !== null) return href === pendingHref;
     return isActive(href);
   };
-  const isMoreHighlighted =
-    pendingHref !== null
-      ? moreNavLinks.some((item) => item.href === pendingHref)
-      : moreNavLinks.some((item) => isActive(item.href));
 
   useEffect(() => {
     const onEscape = (event: KeyboardEvent) => {
@@ -104,18 +93,6 @@ export function SiteHeader() {
 
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
-  }, []);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (!moreMenuRef.current) return;
-      if (!moreMenuRef.current.contains(event.target as Node)) {
-        setIsMoreMenuOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
@@ -185,73 +162,6 @@ export function SiteHeader() {
                   </li>
                 );
               })}
-              <li ref={moreMenuRef} className="relative">
-                <div
-                  role="button"
-                  tabIndex={0}
-                  aria-haspopup="menu"
-                  aria-expanded={isMoreMenuOpen}
-                  onClick={() => setIsMoreMenuOpen((prev) => !prev)}
-                  onKeyDown={(event) => {
-                    if (event.key === "Enter" || event.key === " ") {
-                      event.preventDefault();
-                      setIsMoreMenuOpen((prev) => !prev);
-                    }
-                  }}
-                  className={`relative inline-flex rounded-full items-center justify-center px-4 py-2.5 text-base font-medium transition-colors focus:outline-none ${
-                    isMoreHighlighted
-                      ? "teal-link"
-                      : "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
-                  }`}
-                >
-                  {isMoreHighlighted ? (
-                    <motion.span
-                      layoutId="nav-active-pill"
-                      className="absolute inset-0 rounded-full bg-teal-700 shadow-sm"
-                      transition={{
-                        type: "spring",
-                        stiffness: 380,
-                        damping: 30,
-                      }}
-                    />
-                  ) : null}
-                  <span className="relative z-10 inline-flex items-center justify-center gap-1.5 text-inherit">
-                    <Ellipsis className="h-4 w-4 fill-none" />
-                    More
-                  </span>
-                </div>
-                {isMoreMenuOpen ? (
-                  <div
-                    role="menu"
-                    className="absolute right-0 z-40 mt-2 w-56 rounded-2xl border border-slate-200 bg-white p-2 shadow-lg"
-                  >
-                    <ul className="space-y-1">
-                      {moreNavLinks.map((item) => {
-                        const Icon = navIcons[item.href] ?? Home;
-                        return (
-                          <li key={item.href}>
-                            <Link
-                              href={item.href}
-                              onClick={() => {
-                                setPendingHref(item.href);
-                                setIsMoreMenuOpen(false);
-                              }}
-                              className={`inline-flex w-full items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium transition ${
-                                isHighlighted(item.href)
-                                  ? "bg-teal-700 text-white"
-                                  : "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
-                              }`}
-                            >
-                              <Icon className="h-4 w-4 fill-none" />
-                              {item.label}
-                            </Link>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </div>
-                ) : null}
-              </li>
             </ul>
           </nav>
         </div>
@@ -266,31 +176,6 @@ export function SiteHeader() {
             <nav aria-label="Mobile Primary" className="flex-1 px-5">
               <ul className="space-y-2">
                 {primaryNavLinks.map((item) => {
-                  const Icon = navIcons[item.href] ?? Home;
-                  return (
-                    <li key={item.href}>
-                      <Link
-                        href={item.href}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className={`inline-flex w-full items-center gap-2 rounded-xl px-3.5 py-3 text-base font-medium transition ${
-                          isActive(item.href)
-                            ? "teal-link bg-teal-700"
-                            : "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
-                        }`}
-                      >
-                        <Icon className="h-4 w-4 fill-none" />
-                        {item.label}
-                      </Link>
-                    </li>
-                  );
-                })}
-                <li className="pt-2">
-                  <p className="inline-flex items-center gap-1.5 px-1 text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
-                    <Ellipsis className="h-3.5 w-3.5 fill-none" />
-                    More
-                  </p>
-                </li>
-                {moreNavLinks.map((item) => {
                   const Icon = navIcons[item.href] ?? Home;
                   return (
                     <li key={item.href}>

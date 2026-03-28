@@ -5,6 +5,7 @@ import { navLinks } from "@/lib/site-data";
 
 const contact = {
   email: "ananyam@srmist.edu.in",
+  secondaryEmail: "ananyaq27@gmail.com",
   mapsUrl: "https://maps.app.goo.gl/W1w41B2wLas4V69D7",
   institutionUrl: "https://www.srmist.edu.in/",
   address:
@@ -13,6 +14,7 @@ const contact = {
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
+  const footerNavLinks = [...navLinks, { href: "/research/funding", label: "Funding" }];
 
   return (
     <footer className="border-t border-slate-200 bg-slate-50">
@@ -43,7 +45,7 @@ export function SiteFooter() {
               Navigation
             </h2>
             <ul className="mt-4 space-y-2">
-              {navLinks.map((item) => (
+              {footerNavLinks.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
@@ -67,6 +69,13 @@ export function SiteFooter() {
               >
                 <Mail className="h-4 w-4" />
                 {contact.email}
+              </a>
+              <a
+                href={`mailto:${contact.secondaryEmail}`}
+                className="inline-flex items-center gap-2 text-sm text-slate-700 transition hover:text-slate-900"
+              >
+                <Mail className="h-4 w-4" />
+                {contact.secondaryEmail}
               </a>
               <p className="text-sm leading-relaxed text-slate-600">
                 {contact.address}

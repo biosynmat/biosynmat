@@ -4,8 +4,8 @@ import { getSiteUrl } from "@/lib/site-url";
 const PUBLIC_ROUTES = [
   "",
   "/research",
+  "/research/funding",
   "/publications",
-  "/funding",
   "/news",
   "/team",
   "/gallery",

@@ -109,6 +109,12 @@ export default function OpportunitiesPage() {
               >
                 ananyam@srmist.edu.in
               </a>
+              <a
+                href="mailto:ananyaq27@gmail.com"
+                className="mt-1 text-sm text-slate-800 underline decoration-slate-300 underline-offset-4"
+              >
+                ananyaq27@gmail.com
+              </a>
             </div>
             <p className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.1em] text-slate-500">
               <MapPin className="h-3.5 w-3.5" />

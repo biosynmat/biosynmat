@@ -32,8 +32,8 @@ export default function HomePage() {
               Dr. Ananya Mishra&apos;s BioSynMat Lab
             </h1>
             <p className="max-w-2xl text-lg leading-relaxed text-slate-700">
-              Our Research is dedicated to creating bioinspired synthetic
-              materials that emulate the structure, dynamics and functionality
+              Our research is dedicated to creating BIOinspired SYNthetic
+              MATerials that emulate the structure, dynamics and functionality
               of living systems. Our work bridges chemistry, materials science
               and biology to understand and engineer protocells as minimal
               models of life.

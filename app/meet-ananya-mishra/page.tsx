@@ -59,6 +59,13 @@ export default function MeetPiPage() {
               <Mail className="h-3.5 w-3.5" />
               {piDetails.email}
             </a>
+            <a
+              href="mailto:ananyaq27@gmail.com"
+              className="mt-2 inline-flex items-center gap-1.5 text-sm text-slate-600 underline decoration-slate-300 underline-offset-4"
+            >
+              <Mail className="h-3.5 w-3.5" />
+              ananyaq27@gmail.com
+            </a>
             <div className="mt-2 flex flex-wrap items-center gap-2">
               <a
                 href={piLinkedin}
@@ -120,9 +127,7 @@ export default function MeetPiPage() {
               ))}
             </div>
 
-            <h2 className="mt-8 text-2xl font-semibold text-slate-900">
-              Achievements, Fellowship and Awards
-            </h2>
+            <h2 className="mt-8 text-2xl font-semibold text-slate-900">Achievements</h2>
             <ul className="mt-4 space-y-3">
               {piDetails.achievements.map((item) => (
                 <li

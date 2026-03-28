@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { PageHeader } from "@/components/ui/page-header";
 import { SectionCard } from "@/components/ui/section-card";
 import { researchSchemes } from "@/lib/site-data";
@@ -27,6 +28,24 @@ export default function ResearchPage() {
         title="Research"
         description="Our research program investigates how synthetic protocells can model natural cellular behavior and scale toward higher-order tissue-like systems."
       />
+      <div className="mb-8 rounded-3xl border border-teal-100 bg-teal-50 p-6 sm:p-8">
+        <div className="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-end">
+          <div>
+            <h2 className="text-2xl font-semibold text-slate-900">Research Funding</h2>
+            <p className="mt-2 max-w-3xl text-slate-700">
+              Explore the grants and fellowships supporting our ongoing research activities.
+            </p>
+          </div>
+          <div>
+            <Link
+              href="/research/funding"
+              className="teal-link inline-flex items-center rounded-full bg-teal-700 px-5 py-2.5 text-sm font-semibold transition hover:bg-teal-800"
+            >
+              View Funding
+            </Link>
+          </div>
+        </div>
+      </div>
 
       <div className="grid gap-6">
         {researchSchemes.map((scheme) => (
