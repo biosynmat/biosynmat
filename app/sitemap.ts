@@ -1,26 +1,63 @@
 import type { MetadataRoute } from "next";
-import { getSiteUrl } from "@/lib/site-url";
 
-const PUBLIC_ROUTES = [
-  "",
-  "/research",
-  "/research/funding",
-  "/publications",
-  "/news",
-  "/team",
-  "/gallery",
-  "/meet-ananya-mishra",
-  "/opportunities",
-] as const;
+const BASE_URL = "https://biosynmat.vercel.app";
+const LAST_MODIFIED = "2026-03-28";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const siteUrl = getSiteUrl();
-  const now = new Date();
-
-  return PUBLIC_ROUTES.map((route) => ({
-    url: `${siteUrl.origin}${route}`,
-    lastModified: now,
-    changeFrequency: route === "" ? "weekly" : "monthly",
-    priority: route === "" ? 1 : 0.7,
-  }));
+  return [
+    {
+      url: `${BASE_URL}/`,
+      lastModified: LAST_MODIFIED,
+      changeFrequency: "weekly",
+      priority: 1,
+    },
+    {
+      url: `${BASE_URL}/research`,
+      lastModified: LAST_MODIFIED,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/research/funding`,
+      lastModified: LAST_MODIFIED,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/publications`,
+      lastModified: LAST_MODIFIED,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/news`,
+      lastModified: LAST_MODIFIED,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/team`,
+      lastModified: LAST_MODIFIED,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/gallery`,
+      lastModified: LAST_MODIFIED,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/meet-ananya-mishra`,
+      lastModified: LAST_MODIFIED,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/opportunities`,
+      lastModified: LAST_MODIFIED,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+  ];
 }
