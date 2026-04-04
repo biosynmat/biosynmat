@@ -29,8 +29,37 @@ export function TeamMembersGrid() {
     queryFn: readTeamMembers,
   });
 
-  const items: TeamMemberRecord[] =
+  const baseItems: TeamMemberRecord[] =
     records.length > 0 ? records : fallbackMembers();
+  const items: TeamMemberRecord[] = (() => {
+    const arranged = [...baseItems];
+    const normalize = (value: string) => value.trim().toLowerCase();
+    const hasTokens = (value: string, tokens: string[]) =>
+      tokens.every((token) => value.includes(token));
+
+    const aathilaIndex = arranged.findIndex((member) =>
+      hasTokens(normalize(member.name), ["aathila"]),
+    );
+    if (aathilaIndex > 0) {
+      const [aathilaMember] = arranged.splice(aathilaIndex, 1);
+      arranged.unshift(aathilaMember);
+    }
+
+    const imranIndex = arranged.findIndex((member) =>
+      hasTokens(normalize(member.name), ["imran", "fareed"]),
+    );
+    const hennaIndex = arranged.findIndex((member) =>
+      hasTokens(normalize(member.name), ["henna"]),
+    );
+
+    if (imranIndex === -1 || hennaIndex === -1 || imranIndex < hennaIndex) {
+      return arranged;
+    }
+
+    const [imranMember] = arranged.splice(imranIndex, 1);
+    arranged.splice(hennaIndex, 0, imranMember);
+    return arranged;
+  })();
 
   if (isLoading) {
     return <LoadingIndicator label="Loading team members..." />;

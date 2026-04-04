@@ -23,19 +23,19 @@ const fundingItems = [
   },
   {
     title:
-      "Gandhian Young Technological Innovation Award (GYTI) funded by Biotechnology Industry Research Assistance Council (BIRAC) - Society for Research and Initiatives for Sustainable Technologies and Institutions (SRISTI) (2019)",
-    amount: "\u20B9 15,00,000 research grant",
-    duration: "2 years",
-    details:
-      "Research Title - Actin Mimetic ATP Driven Controlled Supramolecular Polymerization",
-  },
-  {
-    title:
       "Marie Sklodowska Curie (MSC)-Individual Fellowship granted by MSCA European Commission (2021-2023)",
     amount: "\u00A3 2,24,933.76 research grant",
     duration: "2 years",
     details:
       "Research title - Programmed Protocells",
+  },
+  {
+    title:
+      "Gandhian Young Technological Innovation Award (GYTI) funded by Biotechnology Industry Research Assistance Council (BIRAC) - Society for Research and Initiatives for Sustainable Technologies and Institutions (SRISTI) (2019)",
+    amount: "\u20B9 15,00,000 research grant",
+    duration: "2 years",
+    details:
+      "Research Title - Actin Mimetic ATP Driven Controlled Supramolecular Polymerization",
   },
 ] as const;
 
