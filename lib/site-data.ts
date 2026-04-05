@@ -44,7 +44,7 @@ export const piDetails = {
   webofscience: "https://www.webofscience.com/wos/author/record/GZA-8930-2022",
   scopus: "https://www.scopus.com/authid/detail.uri?authorId=57214672246",
   bio: [
-    "Dr Ananya Mishra is an Assistant Professor (Research) at the Department of Chemistry, SRMIST, Kattankulathur, Chennai since May 2025.",
+    "Dr. Ananya Mishra is an Assistant Professor (Research) at the Department of Chemistry, SRMIST, Kattankulathur, Chennai since May 2025.",
     "She completed her BSc (Hons.) in Chemistry from Hindu College, University of Delhi. She subsequently joined Jawaharlal Nehru Centre for Advanced Scientific Research (JNCASR), Bangalore, as an Integrated PhD student, where she completed both her masters and doctoral studies under the supervision of Prof. Subi J. George. Her doctoral research focused on supramolecular chemistry with an emphasis on bioinspired self-assembly.",
     "Following her PhD, she pursued postdoctoral research in the group of Stephen Mann, FRS, where she was awarded the prestigious Marie Sklodowska-Curie Fellowship. Her postdoctoral work centered on the development of programmable protocells and prototissues, advancing the understanding of artificial cellular systems.",
   ],
