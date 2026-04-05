@@ -53,13 +53,36 @@ export default function ResearchPage() {
             <h2 className="text-2xl font-semibold text-slate-900">{scheme.title}</h2>
             <p className="mt-3 leading-relaxed text-slate-700">{scheme.summary}</p>
             <div className="mt-5 overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 p-3">
-              <Image
-                src={scheme.image}
-                alt={`${scheme.title} diagram`}
-                width={1400}
-                height={850}
-                className="mx-auto h-auto w-full max-w-3xl rounded-xl object-contain"
-              />
+              {!scheme.image ? (
+                <div className="flex min-h-[220px] items-center justify-center rounded-xl border border-dashed border-slate-300 bg-white px-4 text-center text-sm font-medium text-slate-500">
+                  Scheme image will be added soon.
+                </div>
+              ) : scheme.id === "scheme-1" ? (
+                <div className="grid gap-3">
+                  <Image
+                    src="/research/cross-communication.jpg"
+                    alt="Cross communication between synthetic protocells"
+                    width={1400}
+                    height={850}
+                    className="mx-auto h-auto w-full max-w-3xl rounded-xl object-contain"
+                  />
+                  <Image
+                    src="/research/interprotocellular-communication.jpg"
+                    alt="Inter-protocellular communication pathway"
+                    width={1400}
+                    height={850}
+                    className="mx-auto h-auto w-full max-w-3xl rounded-xl object-contain"
+                  />
+                </div>
+              ) : (
+                <Image
+                  src={scheme.image}
+                  alt={`${scheme.title} diagram`}
+                  width={1400}
+                  height={850}
+                  className="mx-auto h-auto w-full max-w-3xl rounded-xl object-contain"
+                />
+              )}
             </div>
           </SectionCard>
         ))}

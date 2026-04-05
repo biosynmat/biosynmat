@@ -18,7 +18,7 @@ export type ResearchScheme = {
   id: string;
   title: string;
   summary: string;
-  image: string;
+  image?: string;
 };
 
 export const navLinks: NavLink[] = [
@@ -101,6 +101,12 @@ export const teamMembers: TeamMember[] = [
 
 export const researchSchemes: ResearchScheme[] = [
   {
+    id: "scheme-0",
+    title: "Synthesis of New Protocell Architectures",
+    summary:
+      "We focus on synthesizing new protocell systems with programmable structure, composition, and function as a foundation for communication and tissue-like assembly studies.",
+  },
+  {
     id: "scheme-1",
     title:
       "Mimicking Natural Cell to Cell Communication Using Synthetic Protocells",
@@ -113,6 +119,13 @@ export const researchSchemes: ResearchScheme[] = [
     title: "Protocells to Prototissues",
     summary:
       "Create higher-order assemblies where protocells organize into functional clusters that exhibit coordinated responses and collective behavior.",
-    image: "/research/scheme-2.png",
+    image: "/research/interconnected3.jpg",
+  },
+  {
+    id: "scheme-3",
+    title: "Synthetic and Natural Cells Functioning Together",
+    summary:
+      "Develop bio-hybrid constructs where synthetic protocells interface with living cells to exchange signals and produce coordinated functional outputs.",
+    image: "/research/biohybrid-construct.jpg",
   },
 ];
