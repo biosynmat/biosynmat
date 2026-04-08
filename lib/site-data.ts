@@ -105,6 +105,7 @@ export const researchSchemes: ResearchScheme[] = [
     title: "Synthesis of New Protocell Architectures",
     summary:
       "We focus on synthesizing new protocell systems with programmable structure, composition, and function as a foundation for communication and tissue-like assembly studies.",
+    image: "/research/protocell-architectures.jpg",
   },
   {
     id: "scheme-1",

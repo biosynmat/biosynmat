@@ -63,6 +63,21 @@ export default function TeamPage() {
         </div>
       </SectionCard>
 
+      <SectionCard className="mb-10">
+        <p className="mb-4 text-sm font-semibold uppercase tracking-[0.12em] text-teal-800">
+          Meet the Team
+        </p>
+        <div className="overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 p-2 sm:p-3">
+          <Image
+            src="/team/group.jpeg"
+            alt="BioSynMat lab group photo"
+            width={1200}
+            height={1600}
+            className="h-auto w-full rounded-xl object-cover"
+          />
+        </div>
+      </SectionCard>
+
       <SectionCard>
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.12em] text-teal-800">
           Team
