@@ -60,17 +60,13 @@ export default function HomePage() {
             </h2>
             <ul className="space-y-3 text-sm leading-relaxed text-slate-700">
               <li className="rounded-xl bg-white p-3">
-                Construction of programmable protocells
+                Programmable and biohybrid protocells and prototissues.
               </li>
               <li className="rounded-xl bg-white p-3">
-                Synthetic cell-to-cell communications in protocell populations
+                Interprotocellular communication.
               </li>
               <li className="rounded-xl bg-white p-3">
-                Hierarchical organization from protocells to prototissues
-              </li>
-              <li className="rounded-xl bg-white p-3">
-                Convergence of supramolecular self-assembly and protocell
-                biochemistry
+                Bioinspired supramolecular self-assembly
               </li>
             </ul>
           </div>

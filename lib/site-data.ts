@@ -102,29 +102,28 @@ export const teamMembers: TeamMember[] = [
 export const researchSchemes: ResearchScheme[] = [
   {
     id: "scheme-0",
-    title: "Synthesis of New Protocell Architectures",
+    title: "Programmable Protocell Architectures",
     summary:
-      "We focus on synthesizing new protocell systems with programmable structure, composition, and function as a foundation for communication and tissue-like assembly studies.",
+      "We focus on synthesizing new protocell systems with programmable structures, composition and function as a foundation for emulating natural cells in artificial systems. We also focus on the interplay of supramolecular self-assembly with protocells.",
     image: "/research/protocell-architectures.jpg",
   },
   {
     id: "scheme-1",
-    title:
-      "Mimicking Natural Cell to Cell Communication Using Synthetic Protocells",
+    title: "Interprotocellular communication",
     summary:
-      "Design synthetic compartments that exchange molecular signals to emulate biological communication behavior with tunable control over timing and selectivity.",
+      "We design synthetic compartments with modulable membranes that can exchange molecular signals to mimic biological communication behavior with tunable control over timing and selectivity.",
     image: "/research/scheme-1.png",
   },
   {
     id: "scheme-2",
-    title: "Protocells to Prototissues",
+    title: "Protocells to prototissues",
     summary:
-      "Create higher-order assemblies where protocells organize into functional clusters that exhibit coordinated responses and collective behavior.",
+      "We create higher-order assemblies where protocells organize into functional clusters that exhibit coordinated responses and collective behavior.",
     image: "/research/interconnected3.jpg",
   },
   {
     id: "scheme-3",
-    title: "Synthetic and Natural Cells Functioning Together",
+    title: "Synthetic/Natural Cell Synergy",
     summary:
       "Develop bio-hybrid constructs where synthetic protocells interface with living cells to exchange signals and produce coordinated functional outputs.",
     image: "/research/biohybrid-construct.jpg",
