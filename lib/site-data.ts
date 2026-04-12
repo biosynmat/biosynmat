@@ -105,7 +105,7 @@ export const researchSchemes: ResearchScheme[] = [
     title: "Programmable protocell architectures",
     summary:
       "We focus on synthesizing new protocell systems with programmable structures, composition and function as a foundation for emulating natural cells in artificial systems. We also focus on the interplay of supramolecular self-assembly with protocells.",
-    image: "/research/presentation1.jpg",
+    image: "/research/presentation111.jpg",
   },
   {
     id: "scheme-1",
@@ -119,7 +119,7 @@ export const researchSchemes: ResearchScheme[] = [
     title: "Protocells to prototissues",
     summary:
       "We create higher-order assemblies where protocells organize into functional clusters that exhibit coordinated responses and collective behavior.",
-    image: "/research/kk.jpg",
+    image: "/research/123.jpg",
   },
   {
     id: "scheme-3",
