@@ -60,14 +60,14 @@ export default function ResearchPage() {
               ) : scheme.id === "scheme-1" ? (
                 <div className="grid gap-3">
                   <Image
-                    src="/research/cross-communication.jpg"
-                    alt="Cross communication between synthetic protocells"
+                    src="/research/slide1.jpg"
+                    alt="Second research scheme illustration"
                     width={1400}
                     height={850}
                     className="mx-auto h-auto w-full max-w-3xl rounded-xl object-contain"
                   />
                   <Image
-                    src="/research/interprotocellular-communication.jpg"
+                    src="/research/slide3.jpg"
                     alt="Inter-protocellular communication pathway"
                     width={1400}
                     height={850}

@@ -102,30 +102,30 @@ export const teamMembers: TeamMember[] = [
 export const researchSchemes: ResearchScheme[] = [
   {
     id: "scheme-0",
-    title: "Programmable Protocell Architectures",
+    title: "Programmable protocell architectures",
     summary:
       "We focus on synthesizing new protocell systems with programmable structures, composition and function as a foundation for emulating natural cells in artificial systems. We also focus on the interplay of supramolecular self-assembly with protocells.",
-    image: "/research/protocell-architectures.jpg",
+    image: "/research/presentation1.jpg",
   },
   {
     id: "scheme-1",
     title: "Interprotocellular communication",
     summary:
       "We design synthetic compartments with modulable membranes that can exchange molecular signals to mimic biological communication behavior with tunable control over timing and selectivity.",
-    image: "/research/scheme-1.png",
+    image: "/research/slide1.jpg",
   },
   {
     id: "scheme-2",
     title: "Protocells to prototissues",
     summary:
       "We create higher-order assemblies where protocells organize into functional clusters that exhibit coordinated responses and collective behavior.",
-    image: "/research/interconnected3.jpg",
+    image: "/research/kk.jpg",
   },
   {
     id: "scheme-3",
-    title: "Synthetic/Natural Cell Synergy",
+    title: "Synthetic/Natural cell synergy",
     summary:
       "Develop bio-hybrid constructs where synthetic protocells interface with living cells to exchange signals and produce coordinated functional outputs.",
-    image: "/research/biohybrid-construct.jpg",
+    image: "/research/slide2.jpg",
   },
 ];

@@ -23,7 +23,7 @@ export default function HomePage() {
   return (
     <div className="py-10 px-5 sm:py-14">
       <section>
-        <div className="grid gap-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10 lg:grid-cols-[1.2fr_0.8fr]">
+        <div className="grid gap-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
           <div>
             <p className="mb-4 inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-700">
               About us
@@ -54,7 +54,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 lg:self-center">
             <h2 className="mb-4 text-xl font-semibold text-slate-900">
               Research Focus
             </h2>
