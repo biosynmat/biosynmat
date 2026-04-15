@@ -5,7 +5,12 @@ import { CalendarDays, Images, Search } from "lucide-react";
 import { useMemo, useState } from "react";
 import type { GalleryRecord } from "@/lib/admin-types";
 import { EmptyState } from "@/components/ui/empty-state";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 type GalleryFeedProps = {
   items: GalleryRecord[];
@@ -95,6 +100,11 @@ export function GalleryFeed({ items }: GalleryFeedProps) {
       >
         {selected ? (
           <DialogContent className="max-h-[92vh] max-w-5xl overflow-y-auto rounded-2xl border-slate-200 p-3 shadow-2xl sm:max-w-5xl sm:p-5">
+            <DialogTitle className="sr-only">{selected.title}</DialogTitle>
+            <DialogDescription className="sr-only">
+              Gallery entry with {selected.images.length}{" "}
+              {selected.images.length === 1 ? "image" : "images"}.
+            </DialogDescription>
             <div className="max-h-[58vh] overflow-auto rounded-xl bg-slate-100 p-2 sm:max-h-[68vh]">
               {selected.images.length > 0 ? (
                 <Image

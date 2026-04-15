@@ -1,9 +1,7 @@
 import {
   collection,
   getDocs,
-  orderBy,
   query,
-  type QueryConstraint,
 } from "firebase/firestore";
 import type {
   GalleryRecord,
@@ -13,6 +11,31 @@ import type {
 } from "@/lib/admin-types";
 import { firebaseDb } from "@/lib/firebase/client";
 import { sortByDisplayDateDesc } from "@/lib/utils";
+
+function getCreatedAtMillis(data: Record<string, unknown>): number | null {
+  const value = data.createdAt as unknown;
+  if (!value) {
+    return null;
+  }
+
+  if (typeof value === "number" && Number.isFinite(value)) {
+    return value;
+  }
+
+  if (typeof value === "object" && value !== null) {
+    const maybeWithToMillis = value as { toMillis?: () => number };
+    if (typeof maybeWithToMillis.toMillis === "function") {
+      return maybeWithToMillis.toMillis();
+    }
+
+    const maybeWithSeconds = value as { seconds?: number };
+    if (typeof maybeWithSeconds.seconds === "number") {
+      return maybeWithSeconds.seconds * 1000;
+    }
+  }
+
+  return null;
+}
 
 function mapTeamMember(
   id: string,
@@ -85,35 +108,76 @@ function mapGallery(id: string, data: Record<string, unknown>): GalleryRecord {
 }
 
 export async function readTeamMembers() {
-  const q = query(
-    collection(firebaseDb, "team_members"),
-    orderBy("createdAt", "asc"),
-  );
+  const q = query(collection(firebaseDb, "team_members"));
   const snapshot = await getDocs(q);
-  return snapshot.docs.map((doc) => mapTeamMember(doc.id, doc.data()));
+  return snapshot.docs
+    .map((doc) => ({
+      record: mapTeamMember(doc.id, doc.data()),
+      createdAt: getCreatedAtMillis(doc.data()),
+    }))
+    .sort((a, b) => {
+      if (a.createdAt !== null && b.createdAt !== null) {
+        return a.createdAt - b.createdAt;
+      }
+      if (a.createdAt !== null) {
+        return -1;
+      }
+      if (b.createdAt !== null) {
+        return 1;
+      }
+      return a.record.name.localeCompare(b.record.name);
+    })
+    .map((entry) => entry.record);
 }
 
 export async function readPublications() {
-  const q = query(
-    collection(firebaseDb, "publications"),
-    orderBy("createdAt", "desc"),
-  );
+  const q = query(collection(firebaseDb, "publications"));
   const snapshot = await getDocs(q);
-  return snapshot.docs.map((doc) => mapPublication(doc.id, doc.data()));
+  return snapshot.docs
+    .map((doc) => ({
+      record: mapPublication(doc.id, doc.data()),
+      createdAt: getCreatedAtMillis(doc.data()),
+    }))
+    .sort((a, b) => {
+      if (a.createdAt !== null && b.createdAt !== null) {
+        return b.createdAt - a.createdAt;
+      }
+      if (a.createdAt !== null) {
+        return -1;
+      }
+      if (b.createdAt !== null) {
+        return 1;
+      }
+      return b.record.year - a.record.year;
+    })
+    .map((entry) => entry.record);
 }
 
 export async function readGroupPublications() {
-  const q = query(
-    collection(firebaseDb, "group_publications"),
-    orderBy("createdAt", "desc"),
-  );
+  const q = query(collection(firebaseDb, "group_publications"));
   const snapshot = await getDocs(q);
-  return snapshot.docs.map((doc) => mapPublication(doc.id, doc.data()));
+  return snapshot.docs
+    .map((doc) => ({
+      record: mapPublication(doc.id, doc.data()),
+      createdAt: getCreatedAtMillis(doc.data()),
+    }))
+    .sort((a, b) => {
+      if (a.createdAt !== null && b.createdAt !== null) {
+        return b.createdAt - a.createdAt;
+      }
+      if (a.createdAt !== null) {
+        return -1;
+      }
+      if (b.createdAt !== null) {
+        return 1;
+      }
+      return b.record.year - a.record.year;
+    })
+    .map((entry) => entry.record);
 }
 
 export async function readNews(limitCount?: number) {
-  const constraints: QueryConstraint[] = [orderBy("createdAt", "desc")];
-  const q = query(collection(firebaseDb, "news"), ...constraints);
+  const q = query(collection(firebaseDb, "news"));
   const snapshot = await getDocs(q);
   const records = snapshot.docs.map((doc) => mapNews(doc.id, doc.data()));
   const sorted = sortByDisplayDateDesc(records);
@@ -124,10 +188,7 @@ export async function readNews(limitCount?: number) {
 }
 
 export async function readGallery() {
-  const q = query(
-    collection(firebaseDb, "gallery_images"),
-    orderBy("createdAt", "desc"),
-  );
+  const q = query(collection(firebaseDb, "gallery_images"));
   const snapshot = await getDocs(q);
   const records = snapshot.docs.map((doc) => mapGallery(doc.id, doc.data()));
   return sortByDisplayDateDesc(records);
