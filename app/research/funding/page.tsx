@@ -16,8 +16,8 @@ export const metadata: Metadata = {
 const fundingItems = [
   {
     title: "SRMIST-SERI Grant (2026-2028)",
-    amount: "2 years",
-    duration: "2026-2028",
+    amount: "₹ 3,75,000",
+    duration: "2 years",
     details:
       "Research Title - Plasmonic Protocells: Bio-Nano Hybrid Platforms for Artificial Photosynthesis",
   },
