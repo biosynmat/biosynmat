@@ -15,6 +15,13 @@ export const metadata: Metadata = {
 
 const fundingItems = [
   {
+    title: "SRMIST-SERI Grant (2026-2028)",
+    amount: "2 years",
+    duration: "2026-2028",
+    details:
+      "Research Title - Plasmonic Protocells: Bio-Nano Hybrid Platforms for Artificial Photosynthesis",
+  },
+  {
     title: "INSPIRE Faculty Fellowship Scheme (2025-2030)",
     amount: "\u20B9 35,00,000 research grant",
     duration: "5 years",
