@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { PageHeader } from "@/components/ui/page-header";
 import { SectionCard } from "@/components/ui/section-card";
+import { CollaborationMap } from "@/components/research/collaboration-map";
 import { researchSchemes } from "@/lib/site-data";
 
 export const metadata: Metadata = {
@@ -46,6 +47,8 @@ export default function ResearchPage() {
           </div>
         </div>
       </div>
+
+      <CollaborationMap />
 
       <div className="grid gap-6">
         {researchSchemes.map((scheme) => (
