@@ -1,0 +1,20 @@
+
+> bio-syn-mat@0.1.0 dev
+> next dev
+
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.29.252:3000
+- Environments: .env
+
+✓ Starting...
+✓ Ready in 3.3s
+○ Compiling / ...
+ HEAD / 200 in 6.9s (compile: 6.1s, render: 794ms)
+ GET / 200 in 150ms (compile: 10ms, render: 140ms)
+ GET /team 200 in 320ms (compile: 274ms, render: 46ms)
+ GET /research 200 in 291ms (compile: 251ms, render: 40ms)
+✓ Compiled in 430ms
+✓ Compiled in 302ms
+✓ Compiled in 182ms
+✓ Compiled in 110ms

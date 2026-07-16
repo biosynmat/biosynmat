@@ -38,12 +38,30 @@ const locations = [
     region: "Southeast Asia",
   },
   {
+    name: "India",
+    shortName: "India",
+    coordinates: [78.9, 22] as [number, number],
+    countryId: "356",
+    region: "South Asia",
+  },
+  {
     name: "United States of America",
     shortName: "United States",
     coordinates: [-98, 39] as [number, number],
     countryId: "840",
     region: "North America",
   },
+] as const;
+
+const cityMarkers = [
+  { name: "Delhi", coordinates: [77.209, 28.6139] as [number, number] },
+  { name: "Bangalore", coordinates: [77.5946, 12.9716] as [number, number] },
+  { name: "Chennai", coordinates: [80.2707, 13.0827] as [number, number] },
+  { name: "New York", coordinates: [-74.006, 40.7128] as [number, number] },
+  { name: "London", coordinates: [-0.1276, 51.5072] as [number, number] },
+  { name: "Berlin", coordinates: [13.405, 52.52] as [number, number] },
+  { name: "Tokyo", coordinates: [139.6917, 35.6895] as [number, number] },
+  { name: "Bangkok", coordinates: [100.5018, 13.7563] as [number, number] },
 ] as const;
 
 const topology = worldData as unknown as Topology;
@@ -88,7 +106,7 @@ export function CollaborationMap() {
               viewBox="0 0 1000 500"
               className="h-full w-full"
               role="img"
-              aria-label="World map showing research collaborations in the United Kingdom, Germany, Japan, Thailand, and the United States of America"
+              aria-label="World map showing research collaborations in the United Kingdom, Germany, Japan, Thailand, India, and the United States of America, with city markers for Delhi, Bangalore, Chennai, New York, London, Berlin, Tokyo, and Bangkok."
             >
               <g>
                 {countries.features.map((country) => {
@@ -117,6 +135,29 @@ export function CollaborationMap() {
                         }
                       }}
                     />
+                  );
+                })}
+              </g>
+
+              <g>
+                {cityMarkers.map((marker) => {
+                  const [x, y] = projection(marker.coordinates) ?? [0, 0];
+
+                  return (
+                    <g
+                      key={marker.name}
+                      aria-label={`City marker for ${marker.name}`}
+                      transform={`translate(${x}, ${y})`}
+                    >
+                      <path
+                        d="M0 0C-5 0-9 4-9 9C-9 15.6 0 24 0 24S9 15.6 9 9C9 4 5 0 0 0Z"
+                        fill="#ef4444"
+                        stroke="#fef2f2"
+                        strokeWidth="1.2"
+                        transform="translate(0 -24)"
+                      />
+                      <circle cx="0" cy="-15" r="3.2" fill="#fef2f2" />
+                    </g>
                   );
                 })}
               </g>
@@ -150,6 +191,7 @@ export function CollaborationMap() {
                     </g>
                   );
                 })()}
+
             </svg>
           </div>
         </div>
