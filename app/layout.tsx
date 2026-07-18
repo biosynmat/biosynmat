@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Lora, Source_Sans_3, Geist } from "next/font/google";
 import "@uploadthing/react/styles.css";
 import { SiteFooter } from "@/components/site-footer";
@@ -138,6 +139,7 @@ export default function RootLayout({
             <SiteFooter />
           </div>
         </QueryProvider>
+        <Analytics />
       </body>
     </html>
   );

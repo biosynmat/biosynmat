@@ -71,8 +71,8 @@ export default function TeamPage() {
           <Image
             src="/team/group.jpeg"
             alt="BioSynMat lab group photo"
-            width={1200}
-            height={1600}
+            width={2400}
+            height={1661}
             className="h-auto w-full rounded-xl object-cover"
           />
         </div>

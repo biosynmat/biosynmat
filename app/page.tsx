@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { HomePublicationsPreview } from "@/components/public/home-publications-preview";
+import { HomeVisitorCount } from "@/components/public/home-visitor-count";
 import { NewsFeed } from "@/components/public/news-feed";
 
 export const metadata: Metadata = {
@@ -52,6 +53,7 @@ export default function HomePage() {
                 Explore Research
               </Link>
             </div>
+            <HomeVisitorCount />
           </div>
 
           <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6 lg:self-center">

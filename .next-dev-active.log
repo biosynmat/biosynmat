@@ -18,3 +18,4 @@
 ✓ Compiled in 302ms
 ✓ Compiled in 182ms
 ✓ Compiled in 110ms
+ GET /team 200 in 42ms (compile: 9ms, render: 33ms)
