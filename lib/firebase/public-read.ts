@@ -107,6 +107,11 @@ function mapGallery(id: string, data: Record<string, unknown>): GalleryRecord {
   };
 }
 
+function isRemovedGalleryItem(record: GalleryRecord): boolean {
+  const normalizedTitle = record.title.trim().toLowerCase();
+  return normalizedTitle.includes("maria") && normalizedTitle.includes("birthday");
+}
+
 export async function readTeamMembers() {
   const q = query(collection(firebaseDb, "team_members"));
   const snapshot = await getDocs(q);
@@ -191,5 +196,5 @@ export async function readGallery() {
   const q = query(collection(firebaseDb, "gallery_images"));
   const snapshot = await getDocs(q);
   const records = snapshot.docs.map((doc) => mapGallery(doc.id, doc.data()));
-  return sortByDisplayDateDesc(records);
+  return sortByDisplayDateDesc(records.filter((record) => !isRemovedGalleryItem(record)));
 }

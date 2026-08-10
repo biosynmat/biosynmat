@@ -29,8 +29,14 @@ export function TeamMembersGrid() {
     queryFn: readTeamMembers,
   });
 
-  const baseItems: TeamMemberRecord[] =
-    records.length > 0 ? records : fallbackMembers();
+  const isRemovedMember = (member: TeamMemberRecord) => {
+    const normalizedName = member.name.trim().toLowerCase();
+    return normalizedName === "jeevi" || normalizedName === "maria jeevitha";
+  };
+
+  const baseItems: TeamMemberRecord[] = (records.length > 0 ? records : fallbackMembers()).filter(
+    (member) => !isRemovedMember(member),
+  );
   const items: TeamMemberRecord[] = (() => {
     const arranged = [...baseItems];
     const normalize = (value: string) => value.trim().toLowerCase();

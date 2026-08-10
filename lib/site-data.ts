@@ -89,14 +89,6 @@ export const teamMembers: TeamMember[] = [
     researchgate: "https://www.researchgate.net/",
     orcid: "https://orcid.org/",
   },
-  {
-    name: "Jeevi",
-    role: "Research Scholar",
-    image: "/team/jeevi.jpg",
-    linkedin: "https://www.linkedin.com/",
-    researchgate: "https://www.researchgate.net/",
-    orcid: "https://orcid.org/",
-  },
 ];
 
 export const researchSchemes: ResearchScheme[] = [

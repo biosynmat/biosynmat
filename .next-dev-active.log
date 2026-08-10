@@ -4,18 +4,20 @@
 
 ▲ Next.js 16.1.6 (Turbopack)
 - Local:         http://localhost:3000
-- Network:       http://192.168.29.252:3000
+- Network:       http://10.9.156.113:3000
 - Environments: .env
 
 ✓ Starting...
-✓ Ready in 3.3s
+✓ Ready in 13.8s
 ○ Compiling / ...
- HEAD / 200 in 6.9s (compile: 6.1s, render: 794ms)
- GET / 200 in 150ms (compile: 10ms, render: 140ms)
- GET /team 200 in 320ms (compile: 274ms, render: 46ms)
- GET /research 200 in 291ms (compile: 251ms, render: 40ms)
-✓ Compiled in 430ms
-✓ Compiled in 302ms
-✓ Compiled in 182ms
-✓ Compiled in 110ms
- GET /team 200 in 42ms (compile: 9ms, render: 33ms)
+ GET / 200 in 12.6s (compile: 12.0s, render: 557ms)
+ POST /api/visitor-count 200 in 1316ms (compile: 615ms, render: 701ms)
+ GET /team 200 in 724ms (compile: 663ms, render: 61ms)
+ GET /gallery 200 in 642ms (compile: 603ms, render: 39ms)
+✓ Compiled in 191ms
+ GET /publications 200 in 601ms (compile: 550ms, render: 52ms)
+ GET /gallery 200 in 204ms (compile: 150ms, render: 54ms)
+ GET /publications 200 in 69ms (compile: 19ms, render: 50ms)
+ GET /research 200 in 906ms (compile: 804ms, render: 102ms)
+ GET /team 200 in 180ms (compile: 118ms, render: 62ms)
+ GET /meet-ananya-mishra 200 in 266ms (compile: 213ms, render: 53ms)
